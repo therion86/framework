@@ -22,5 +22,11 @@
       "cms\\": "src",
       "framework\\": "lib"
     }
-  }
+  },
+  "license": "MIT",
+  "name": "Framework",
+  "authors": [{
+    "name": "Therion86",
+    "role": "Developer"
+  }]
 }
