@@ -1,0 +1,7 @@
+{
+  "database": {
+    "dbDsn": "mysql:host=localhost;dbname=cms",
+    "dbUser": "root",
+    "dbPassword": ""
+  }
+}

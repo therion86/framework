@@ -1,0 +1,26 @@
+{
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "require": {
+    "aura/router": "*",
+    "laminas/laminas-diactoros": "*",
+    "php": ">=7.4",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-simplexml": "*",
+    "cboden/ratchet": "*",
+    "robmorgan/phinx": "*",
+    "symfony/yaml": "*",
+    "twig/twig": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "cms\\": "src",
+      "framework\\": "lib"
+    }
+  }
+}
