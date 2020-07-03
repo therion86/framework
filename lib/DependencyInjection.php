@@ -29,6 +29,7 @@ class DependencyInjection
     private Config $config;
 
     /**
+     * @param string $configFile
      * @author Therion86
      */
     public function __construct(string $configFile)
@@ -37,8 +38,8 @@ class DependencyInjection
         $this->config->init();
         $this->dbHandler = new DbHandler($this->config->getDbConfig());
         if (isset($_SESSION['framework.session']) !== true) {
-            $_SESSION['framework.session'] = true;
             $this->session = new Session();
+            $_SESSION['framework.session'] = true;
         } else {
             $this->session = new Session();
         }

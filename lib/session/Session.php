@@ -15,6 +15,14 @@ class Session
      */
     public function __construct()
     {
+        $sessionDir = BASE_PATH  . '/session';
+        if (! is_dir($sessionDir)) {
+            mkdir($sessionDir);
+        }
+        ini_set('session.save_path', $sessionDir);
+        if (! isset($_SESSION)){
+            session_start();
+        }
     }
 
     /**
