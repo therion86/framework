@@ -1,4 +1,21 @@
 {
+  "name": "therion86/framework",
+  "description": "Framework",
+  "type": "library",
+  "keywords": [
+    "therion86",
+    "framework"
+  ],
+  "homepage": "https://github.com/therion86/framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Therion86",
+      "email": "sascha.emmrich@gmail.com",
+      "role": "Developer"
+    }
+  ],
+
   "config": {
     "platform": {
       "php": "7.4"
@@ -22,11 +39,5 @@
       "cms\\": "src",
       "framework\\": "lib"
     }
-  },
-  "license": "MIT",
-  "name": "Framework",
-  "authors": [{
-    "name": "Therion86",
-    "role": "Developer"
-  }]
+  }
 }
