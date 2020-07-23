@@ -23,7 +23,7 @@ class IndexRoutes implements RouteInterface
      */
     public function addRoutes(RouteContainer $routeContainer): void
     {
-        $routeContainer->addGetRoute('/', IndexFactory::class, IndexPage::class);
+        $routeContainer->addGet('/', IndexFactory::class, IndexPage::class);
     }
 
 }

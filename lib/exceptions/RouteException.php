@@ -17,7 +17,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function noPageDefined(string $routeName): RouteException
+    public static function forNoPageDefined(string $routeName): RouteException
     {
         $message = 'No page for route %s was defined!';
         return new self(sprintf($message, $routeName));
@@ -28,7 +28,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function noFactoryDefined(string $routeName): RouteException
+    public static function forNoFactoryDefined(string $routeName): RouteException
     {
         $message = 'No factory for route %s was defined!';
         return new self(sprintf($message, $routeName));
@@ -39,7 +39,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function alreadyExists(string $routeName): RouteException
+    public static function forAlreadyExists(string $routeName): RouteException
     {
         $message = 'No route %s already Exists!';
         return new self(sprintf($message, $routeName));
@@ -52,7 +52,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function noCreateMethodDefined(
+    public static function forNoCreateMethodDefined(
         string $routeName,
         string $factoryClassName,
         string $pageClassName
@@ -66,7 +66,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function executeMethodNotFoundInPage(string $pageClassName): RouteException
+    public static function forExecuteMethodNotFoundInPage(string $pageClassName): RouteException
     {
         $message = 'Execute action was not found in %s!';
         return new self(sprintf($message, $pageClassName));
@@ -76,7 +76,7 @@ final class RouteException extends Exception
      * @return RouteException
      * @author Therion86
      */
-    public static function emptyBody()
+    public static function forEmptyBody()
     {
         $message = 'Request gets empty body!';
         return new self($message);

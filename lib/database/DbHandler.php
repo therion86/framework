@@ -5,17 +5,20 @@ declare(strict_types=1);
 namespace framework\database;
 
 use framework\config\DbConfig;
+use framework\interfaces\DbConnectionInterface;
+use framework\interfaces\DbHandlerInterface;
+use framework\interfaces\DbStatementInterface;
 
 /**
  * @author Therion86
  */
-class DbHandler
+class DbHandler implements DbHandlerInterface
 {
 
     /**
-     * @var DbConnection|null
+     * @var DbConnectionInterface|null
      */
-    private DbConnection $dbConnection;
+    private ?DbConnectionInterface $dbConnection;
 
     /**
      * @var string
@@ -44,10 +47,10 @@ class DbHandler
     }
 
     /**
-     * @return DbConnection
+     * @return DbConnectionInterface
      * @author Therion86
      */
-    public function getConnection(): DbConnection
+    public function getConnection(): DbConnectionInterface
     {
         if (null === $this->dbConnection) {
             return $this->dbConnection = new DbConnection($this->dsn, $this->user, $this->password);
@@ -57,11 +60,11 @@ class DbHandler
 
     /**
      * @param string $statement
-     * @return DbStatement
+     * @return DbStatementInterface
      * @author Therion86
      */
-    public function prepareStatement(string $statement): DbStatement
+    public function prepareStatement(string $statement): DbStatementInterface
     {
-        return $this->getConnection()->prepare($statement, []);
+        return $this->getConnection()->prepareStatement($statement, []);
     }
 }

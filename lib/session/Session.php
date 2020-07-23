@@ -15,22 +15,22 @@ class Session
      */
     public function __construct()
     {
-        $sessionDir = BASE_PATH  . '/session';
-        if (! is_dir($sessionDir)) {
+        $sessionDir = BASE_PATH . '/session';
+        if (false === is_dir($sessionDir)) {
             mkdir($sessionDir);
         }
         ini_set('session.save_path', $sessionDir);
-        if (! isset($_SESSION)){
+        if (false === isset($_SESSION)) {
             session_start();
         }
     }
 
     /**
-     * @param mixed $value
      * @param string $key
+     * @param mixed $value
      * @author Therion86
      */
-    public function add(
+    public function registerKey(
         string $key,
         $value
     ): void {
@@ -42,7 +42,7 @@ class Session
      * @return mixed|null
      * @author Therion86
      */
-    public function get(string $key)
+    public function getKey(string $key)
     {
         if (!$this->keyExist($key)) {
             return null;
@@ -64,32 +64,32 @@ class Session
     }
 
     /**
-     * @return User|null
+     * @return int|null
      * @author Therion86
      */
-    public function getUser(): ?User
+    public function getUserId(): ?int
     {
-        if (!$this->keyExist('framework.user')) {
+        if (false === $this->keyExist('framework.user.id')) {
             return null;
         }
-        return $this->get('framework.user');
+        return (int)$this->getKey('framework.user.id');
     }
 
     /**
-     * @param User $user
+     * @param int $userId
      * @return void
      * @author Therion86
      */
-    public function addUser(User $user): void
+    public function addUserId(int $userId): void
     {
-        $this->add('framework.user', $user);
+        $this->registerKey('framework.user.id', $userId);
     }
 
     /**
      * @return void
      * @author Therion86
      */
-    public function logout(): void
+    public function destroy(): void
     {
         session_destroy();
         $_SESSION = array();

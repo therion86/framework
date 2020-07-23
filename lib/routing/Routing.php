@@ -10,6 +10,7 @@ use framework\DependencyInjection;
 use framework\exceptions\RouteException;
 use framework\interfaces\HttpResponseInterface;
 use framework\interfaces\RouteRegistererInterface;
+use framework\interfaces\RoutingInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use framework\request\HttpRequestFactory;
@@ -21,7 +22,7 @@ use ReflectionException;
 /**
  * @author Therion86
  */
-class Routing
+class Routing implements RoutingInterface
 {
 
     public const POST = 'post';
@@ -82,6 +83,7 @@ class Routing
 
     /**
      * @return string
+     * @throws RouteException
      * @author Therion86
      */
     public function printContent(): string
@@ -120,8 +122,8 @@ class Routing
             http_response_code($response->getStatusCode());
             $bodies .= $response->getBody();
         }
-        if (empty ($bodies) && !$response instanceof RedirectResponse) {
-            throw RouteException::emptyBody();
+        if (empty ($bodies) && ! $response instanceof RedirectResponse) {
+            throw RouteException::forEmptyBody();
         }
         return $bodies;
     }
@@ -149,15 +151,15 @@ class Routing
         $routerContainer = new RouterContainer();
         $map = $routerContainer->getMap();
         if ('' === $pageClassName) {
-            throw RouteException::noPageDefined($routeName);
+            throw RouteException::forNoPageDefined($routeName);
         }
         if ('' === $factoryClassName) {
-            throw RouteException::noFactoryDefined($routeName);
+            throw RouteException::forNoFactoryDefined($routeName);
         }
         $reflection = new ReflectionClass($pageClassName);
         $createMethod = 'create' . ucfirst($reflection->getShortName());
         if (false === method_exists($factoryClassName, $createMethod)) {
-            throw RouteException::noCreateMethodDefined($routeName, $factoryClassName, $pageClassName);
+            throw RouteException::forNoCreateMethodDefined($routeName, $factoryClassName, $pageClassName);
         }
         $factory = new $factoryClassName($this->di);
         $page = $factory->$createMethod();
@@ -165,7 +167,7 @@ class Routing
             && false === method_exists($page, 'executeRead')
             && false === method_exists($page, 'executeWrite')
         ) {
-            throw RouteException::executeMethodNotFoundInPage($pageClassName);
+            throw RouteException::forExecuteMethodNotFoundInPage($pageClassName);
         }
         switch ($type) {
             case self::POST:

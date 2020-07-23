@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace framework\database;
 
+use framework\interfaces\DbStatementInterface;
 use PDOStatement;
 use framework\exceptions\DbStatementException;
 
 /**
  * @author Therion86
  */
-class DbStatement extends PDOStatement
+class DbStatement extends PDOStatement implements DbStatementInterface
 {
 
     public const FETCH_ASSOC = 2;

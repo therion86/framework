@@ -37,6 +37,7 @@ class DependencyInjection
         $this->config = new Config($configFile);
         $this->config->init();
         $this->dbHandler = new DbHandler($this->config->getDbConfig());
+
         if (isset($_SESSION['framework.session']) !== true) {
             $this->session = new Session();
             $_SESSION['framework.session'] = true;

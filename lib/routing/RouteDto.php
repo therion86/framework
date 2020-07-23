@@ -4,20 +4,37 @@ declare(strict_types=1);
 
 namespace framework\routing;
 
+use framework\interfaces\RouteDtoInterface;
+
 /**
  * @author Therion86
  */
-class RouteDto
+class RouteDto implements RouteDtoInterface
 {
 
+    /**
+     * @var string
+     */
     private string $type;
 
+    /**
+     * @var string
+     */
     private string $routeName;
 
+    /**
+     * @var string
+     */
     private string $routeMap;
 
+    /**
+     * @var string
+     */
     private string $factoryClassName;
 
+    /**
+     * @var string
+     */
     private string $pageClassName;
 
     /**

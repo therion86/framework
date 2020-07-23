@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace framework\routing;
 
 use framework\exceptions\RouteException;
+use framework\interfaces\RouteDtoInterface;
 
 /**
  * @author Therion86
@@ -38,7 +39,7 @@ class RouteContainer
     {
         $routeName = str_replace('/', '.', $routeMap) . $type;
         if (array_key_exists($routeName, $this->routes)) {
-            throw RouteException::alreadyExists($routeName);
+            throw RouteException::forAlreadyExists($routeName);
         }
         $this->routes[$routeName] = new RouteDto($type, $routeName, $routeMap, $factoryClassName, $pageClassName);
     }
@@ -51,7 +52,7 @@ class RouteContainer
      * @throws RouteException
      * @author Therion86
      */
-    public function addGetRoute(
+    public function addGet(
         string $routeMap,
         string $factoryClassName,
         string $pageClassName
@@ -72,7 +73,7 @@ class RouteContainer
      * @throws RouteException
      * @author Therion86
      */
-    public function addPostRoute(
+    public function addPost(
         string $routeMap,
         string $factoryClassName,
         string $pageClassName
@@ -86,7 +87,7 @@ class RouteContainer
     }
 
     /**
-     * @return RouteDto[]
+     * @return RouteDtoInterface[]
      * @author Therion86
      */
     public function getRoutes(): array
