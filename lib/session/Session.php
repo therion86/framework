@@ -2,7 +2,7 @@
 
 namespace framework\session;
 
-use framework\user\User;
+use RuntimeException;
 
 /**
  * @author Therion86
@@ -16,8 +16,8 @@ class Session
     public function __construct()
     {
         $sessionDir = BASE_PATH . '/session';
-        if (false === is_dir($sessionDir)) {
-            mkdir($sessionDir);
+        if ((false === is_dir($sessionDir)) && !mkdir($sessionDir) && !is_dir($sessionDir)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $sessionDir));
         }
         ini_set('session.save_path', $sessionDir);
         if (false === isset($_SESSION)) {

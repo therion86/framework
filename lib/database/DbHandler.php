@@ -15,24 +15,12 @@ use framework\interfaces\DbStatementInterface;
 class DbHandler implements DbHandlerInterface
 {
 
-    /**
-     * @var DbConnectionInterface|null
-     */
     private ?DbConnectionInterface $dbConnection;
 
-    /**
-     * @var string
-     */
     private string $dsn;
 
-    /**
-     * @var string
-     */
     private string $user;
 
-    /**
-     * @var string
-     */
     private string $password;
 
     /**

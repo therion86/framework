@@ -17,19 +17,10 @@ use Twig\Loader\FilesystemLoader;
 class TemplateEngine implements TemplateEngineInterface
 {
 
-    /**
-     * @var string
-     */
     private string $template;
 
-    /**
-     * @var string
-     */
     private string $templatePath;
 
-    /**
-     * @var array
-     */
     private array $variables;
 
     /**
@@ -62,7 +53,7 @@ class TemplateEngine implements TemplateEngineInterface
     public function load(string $templateName, string $module): void
     {
         $this->templatePath = 'src/modules/' . $module . '/templates/';
-        $this->template =   $templateName . '.twig';
+        $this->template = $templateName . '.twig';
     }
 
     /**
@@ -92,7 +83,8 @@ class TemplateEngine implements TemplateEngineInterface
      * @throws SyntaxError
      * @author Therion86
      */
-    private function appendToDefaultTemplate(string $content, string $navigation): string {
+    private function appendToDefaultTemplate(string $content, string $navigation): string
+    {
         $loader = new FilesystemLoader('/');
         $twig = new Environment($loader);
         $twig->load('default.twig');

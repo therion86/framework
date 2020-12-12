@@ -74,4 +74,15 @@ class DbStatement extends PDOStatement implements DbStatementInterface
         }
         $this->queryString = str_replace($paramName, implode(',', $newParams), $this->queryString);
     }
+
+    /**
+     * @param array|null $input_parameters
+     * @return bool
+     * @author Therion86
+     */
+    public function execute(?array $input_parameters = null): bool
+    {
+        parent::execute($input_parameters);
+    }
+
 }

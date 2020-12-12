@@ -15,9 +15,6 @@ use framework\interfaces\HttpResponseInterface;
 class HttpResponse implements HttpResponseInterface
 {
 
-    /**
-     * @var Response
-     */
     protected Response $response;
 
     /**

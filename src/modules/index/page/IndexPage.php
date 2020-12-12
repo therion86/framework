@@ -6,25 +6,13 @@ namespace cms\modules\index\page;
 
 use framework\interfaces\HttpRequestInterface;
 use framework\interfaces\HttpResponseInterface;
-use framework\interfaces\ReadPageInterface;
-use framework\interfaces\TemplateEngineInterface;
 use framework\page\PageAbstract;
 
 /**
  * @author Therion86
  */
-class IndexPage extends PageAbstract implements ReadPageInterface
+class IndexPage extends PageAbstract
 {
-
-    /**
-     * @param TemplateEngineInterface $templateEngine
-     * @author Therion86
-     */
-    public function __construct(
-        TemplateEngineInterface $templateEngine
-    ) {
-        parent::__construct($templateEngine);
-    }
 
     /**
      * @param HttpRequestInterface $request
@@ -32,7 +20,7 @@ class IndexPage extends PageAbstract implements ReadPageInterface
      * @return HttpResponseInterface
      * @author Therion86
      */
-    public function executeRead(
+    public function execute(
         HttpRequestInterface $request,
         HttpResponseInterface $response
     ): HttpResponseInterface {

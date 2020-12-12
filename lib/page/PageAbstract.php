@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace framework\page;
 
 use framework\interfaces\HttpResponseInterface;
+use framework\interfaces\PageInterface;
 use framework\interfaces\TemplateEngineInterface;
 
-abstract class PageAbstract
+abstract class PageAbstract implements PageInterface
 {
 
     /**

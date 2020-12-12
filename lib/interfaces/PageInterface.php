@@ -7,15 +7,13 @@ namespace framework\interfaces;
 /**
  * @author Therion86
  */
-interface ReadPageInterface
+interface PageInterface
 {
-
     /**
      * @param HttpRequestInterface $request
      * @param HttpResponseInterface $response
      * @return HttpResponseInterface
      * @author Therion86
      */
-    public function executeRead(HttpRequestInterface $request, HttpResponseInterface $response): HttpResponseInterface;
-
+    public function execute(HttpRequestInterface $request, HttpResponseInterface $response): HttpResponseInterface;
 }

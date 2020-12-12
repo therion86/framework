@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace framework;
 
 use framework\config\Config;
+use framework\crudGenerator\CrudGenerator;
+use framework\crudGenerator\CrudGeneratorTemplateEngine;
+use framework\crudGenerator\CrudListRepository;
+use framework\crudGenerator\ListGenerator;
 use framework\database\DbHandler;
+use framework\formGenerator\FormGenerator;
 use framework\interfaces\TemplateEngineInterface;
 use framework\session\Session;
 use framework\templateEngine\TemplateEngine;
@@ -16,17 +21,9 @@ use framework\templateEngine\TemplateEngine;
 class DependencyInjection
 {
 
-    /**
-     * @var DbHandler
-     */
     private DbHandler $dbHandler;
 
-    /**
-     * @var Session
-     */
     private Session $session;
-
-    private Config $config;
 
     /**
      * @param string $configFile
@@ -34,9 +31,9 @@ class DependencyInjection
      */
     public function __construct(string $configFile)
     {
-        $this->config = new Config($configFile);
-        $this->config->init();
-        $this->dbHandler = new DbHandler($this->config->getDbConfig());
+        $config = new Config($configFile);
+        $config->init();
+        $this->dbHandler = new DbHandler($config->getDbConfig());
 
         if (isset($_SESSION['framework.session']) !== true) {
             $this->session = new Session();

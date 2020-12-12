@@ -9,6 +9,7 @@ use Aura\Router\RouterContainer;
 use framework\DependencyInjection;
 use framework\exceptions\RouteException;
 use framework\interfaces\HttpResponseInterface;
+use framework\interfaces\PageInterface;
 use framework\interfaces\RouteRegistererInterface;
 use framework\interfaces\RoutingInterface;
 use Psr\Http\Message\RequestInterface;
@@ -27,6 +28,8 @@ class Routing implements RoutingInterface
 
     public const POST = 'post';
     public const GET = 'get';
+    public const DELETE = 'delete';
+    public const PUT = 'put';
     public const CSS = 'css';
 
     /**
@@ -164,39 +167,32 @@ class Routing implements RoutingInterface
         $factory = new $factoryClassName($this->di);
         $page = $factory->$createMethod();
         if ($page !== null
-            && false === method_exists($page, 'executeRead')
-            && false === method_exists($page, 'executeWrite')
+            && ! $page instanceof PageInterface
         ) {
             throw RouteException::forExecuteMethodNotFoundInPage($pageClassName);
         }
+
         switch ($type) {
             case self::POST:
-                $route = $map->post(
-                    $routeName,
-                    $routeMap,
-                    function ($request) use ($page, $response) {
-                        return $page->executeWrite($request, $response);
-                    }
-                );
+                $mapMethod = self::POST;
                 break;
-            case self::GET:
-                $route = $map->get(
-                    $routeName,
-                    $routeMap,
-                    function ($request) use ($page, $response) {
-                        return $page->executeRead($request, $response);
-                    }
-                );
+            case self::DELETE:
+                $mapMethod = self::DELETE;
+                break;
+            case self::PUT:
+                $mapMethod = self::PUT;
                 break;
             default:
-                $route = $map->get(
-                    $routeName,
-                    $routeMap,
-                    function ($request) use ($page, $response) {
-                        return $page->executeRead($request, $response);
-                    }
-                );
+                $mapMethod = self::GET;
         }
+
+        $route = $map->$mapMethod(
+            $routeName,
+            $routeMap,
+            function ($request) use ($page, $response) {
+                return $page->execute($request, $response);
+            }
+        );
         if (isset($options['tokens'])) {
             $route
                 ->tokens((array)$options['tokens']);

@@ -33,4 +33,11 @@ interface DbStatementInterface
      * @author Theiron86
      */
     public function bindArray(array $array, string $paramName, int $dataType): void;
+
+    /**
+     * @param array|null $input_parameters
+     * @return bool
+     * @author Therion86
+     */
+    public function execute(?array $input_parameters = null): bool;
 }
