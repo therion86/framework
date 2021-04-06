@@ -12,7 +12,7 @@ class Request
     private array $get;
     private array $post;
     private array $cookie;
-    private $body;
+    private false|string $body;
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ class Request
         $this->body = file_get_contents('php://input');
     }
 
-    public function body(): string
+    public function body(): false|string
     {
         return $this->body;
     }
