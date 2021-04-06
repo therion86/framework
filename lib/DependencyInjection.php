@@ -2,71 +2,36 @@
 
 declare(strict_types=1);
 
-namespace framework;
+namespace framework\lib;
 
-use framework\config\Config;
-use framework\crudGenerator\CrudGenerator;
-use framework\crudGenerator\CrudGeneratorTemplateEngine;
-use framework\crudGenerator\CrudListRepository;
-use framework\crudGenerator\ListGenerator;
-use framework\database\DbHandler;
-use framework\formGenerator\FormGenerator;
-use framework\interfaces\TemplateEngineInterface;
-use framework\session\Session;
-use framework\templateEngine\TemplateEngine;
+use framework\lib\request\Request;
+use framework\lib\routing\RouteContainer;
+use framework\src\ModuleRegisterer;
 
-/**
- * @author Therion86
- */
 class DependencyInjection
 {
 
-    private DbHandler $dbHandler;
+    private ?Request $request;
+    private RouteContainer $registeredRoutes;
 
-    private Session $session;
-
-    /**
-     * @param string $configFile
-     * @author Therion86
-     */
-    public function __construct(string $configFile)
+    public function __construct()
     {
-        $config = new Config($configFile);
-        $config->init();
-        $this->dbHandler = new DbHandler($config->getDbConfig());
-
-        if (isset($_SESSION['framework.session']) !== true) {
-            $this->session = new Session();
-            $_SESSION['framework.session'] = true;
-        } else {
-            $this->session = new Session();
-        }
+        $this->registeredRoutes = new RouteContainer();
     }
 
-    /**
-     * @return Session
-     * @author Therion86
-     */
-    public function getSession(): Session
+    public function getRequest(): Request
     {
-        return $this->session;
+        return $this->request ?? new Request();
     }
 
-    /**
-     * @return DbHandler
-     * @author Therion86
-     */
-    public function getDbHandler(): DbHandler
+    public function getRegisteredRoutes(): RouteContainer
     {
-        return $this->dbHandler;
+        return $this->registeredRoutes;
     }
 
-    /**
-     * @return TemplateEngineInterface
-     * @author Therion86
-     */
-    public function getTemplateEngine(): TemplateEngineInterface
+    public function registerModules()
     {
-        return new TemplateEngine();
+        $moduleRegisterer = new ModuleRegisterer($this);
+        $moduleRegisterer->registerModules();
     }
 }

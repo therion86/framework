@@ -1,97 +1,33 @@
 <?php
 
-declare(strict_types=1);
 
-namespace framework\routing;
+namespace framework\lib\routing;
 
-use framework\exceptions\RouteException;
-use framework\interfaces\RouteDtoInterface;
 
-/**
- * @author Therion86
- */
 class RouteContainer
 {
+    private array $routes = [];
 
-    /**
-     * @var RouteDto[]
-     */
-    private array $routes;
-
-    /**
-     * @author Therion86
-     */
-    public function __construct()
+    public function addRoute(string $routeUrl, string $type, callable $commandCreateFunction): void
     {
-        $this->routes = [];
-    }
-
-    /**
-     * @param string $type
-     * @param string $routeMap
-     * @param string $factoryClassName
-     * @param string $pageClassName
-     * @return void
-     * @throws RouteException
-     * @author Therion86
-     */
-    private function addRoute(string $type, string $routeMap, string $factoryClassName, string $pageClassName): void
-    {
-        $routeName = str_replace('/', '.', $routeMap) . $type;
-        if (array_key_exists($routeName, $this->routes)) {
-            throw RouteException::forAlreadyExists($routeName);
+        $route = new Route($routeUrl, $type, $commandCreateFunction);
+        if (array_key_exists($route->getRouteUri(), $this->routes)
+            && array_key_exists($route->getType(), $this->routes[$route->getRouteUri()])
+        ) {
+            throw new RouteAlreadyExistsException(
+                'The route ' . $route->getRouteUri() . ' with type ' . $route->getType() . ' is already defined!'
+            );
         }
-        $this->routes[$routeName] = new RouteDto($type, $routeName, $routeMap, $factoryClassName, $pageClassName);
+        $this->routes[$route->getRouteUri()][$route->getType()] = $route;
     }
 
-    /**
-     * @param string $routeMap
-     * @param string $factoryClassName
-     * @param string $pageClassName
-     * @return void
-     * @throws RouteException
-     * @author Therion86
-     */
-    public function addGet(
-        string $routeMap,
-        string $factoryClassName,
-        string $pageClassName
-    ): void {
-        $this->addRoute(
-            Routing::GET,
-            $routeMap,
-            $factoryClassName,
-            $pageClassName
-        );
-    }
-
-    /**
-     * @param string $routeMap
-     * @param string $pageClassName
-     * @param string $factoryClassName
-     * @return void
-     * @throws RouteException
-     * @author Therion86
-     */
-    public function addPost(
-        string $routeMap,
-        string $factoryClassName,
-        string $pageClassName
-    ): void {
-        $this->addRoute(
-            Routing::POST,
-            $routeMap,
-            $factoryClassName,
-            $pageClassName
-        );
-    }
-
-    /**
-     * @return RouteDtoInterface[]
-     * @author Therion86
-     */
-    public function getRoutes(): array
+    public function match(string $routeUri, string $type): bool
     {
-        return $this->routes;
+        return array_key_exists($routeUri, $this->routes) && array_key_exists($type, $this->routes[$routeUri]);
+    }
+
+    public function getRoute(string $routeUri, string $type): Route
+    {
+        return $this->routes[$routeUri][$type];
     }
 }

@@ -1,42 +1,9 @@
 {
-  "name": "therion86/framework",
-  "description": "Framework",
-  "type": "library",
-  "keywords": [
-    "therion86",
-    "framework"
-  ],
-  "homepage": "https://github.com/therion86/framework",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Therion86",
-      "email": "sascha.emmrich@gmail.com",
-      "role": "Developer"
-    }
-  ],
-
-  "config": {
-    "platform": {
-      "php": "7.4"
-    }
-  },
-  "require": {
-    "aura/router": "*",
-    "laminas/laminas-diactoros": "*",
-    "php": ">=7.4",
-    "ext-pdo": "*",
-    "ext-json": "*",
-    "ext-curl": "*",
-    "ext-simplexml": "*",
-    "cboden/ratchet": "*",
-    "robmorgan/phinx": "*",
-    "symfony/yaml": "*",
-    "twig/twig": "^3.0"
-  },
   "autoload": {
     "psr-4": {
-      "framework\\": "lib"
+      "framework\\": ""
     }
-  }
+  },
+  "name": "therion/framework",
+  "description": ""
 }
