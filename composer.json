@@ -5,5 +5,10 @@
     }
   },
   "name": "therion/framework",
-  "description": ""
+  "description": "",
+  "config": {
+    "platform": {
+      "php": "8.0"
+    }
+  }
 }

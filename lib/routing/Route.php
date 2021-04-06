@@ -1,10 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace framework\lib\routing;
-
-
-use framework\lib\DependencyInjection;
 
 class Route
 {
