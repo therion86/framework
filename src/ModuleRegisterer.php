@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace framework\src;
-
 
 use framework\lib\DependencyInjection;
 use framework\src\indexModule\IndexFactory;

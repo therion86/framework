@@ -12,7 +12,8 @@ class Route
 
     public function __construct(string $routeUrl, string $type, callable $commandCreateFunction)
     {
-        $this->routeUrl = $routeUrl;
+        $routeUrl = preg_replace('#\?.*#', '', $routeUrl);
+        $this->routeUrl = (string)$routeUrl;
         $this->type = $type;
         $this->commandCreateFunction = $commandCreateFunction;
     }

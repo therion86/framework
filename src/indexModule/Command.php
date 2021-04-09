@@ -11,7 +11,6 @@ use framework\lib\response\ResponseInterface;
 
 class Command implements CommandInterface
 {
-
     private Request $request;
 
     public function __construct(Request $request)
@@ -21,6 +20,7 @@ class Command implements CommandInterface
 
     public function execute(): ResponseInterface
     {
-        return new Response('Hello World!');
+        $test = $this->request->get('test');
+        return new Response('Hello ' . $test);
     }
 }
