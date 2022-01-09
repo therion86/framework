@@ -2,3 +2,5 @@
 /templates_c/
 /session/
 /.idea/
+/composer.phar
+/.htaccess
