@@ -7,18 +7,22 @@ namespace framework\lib\routing;
 
 use framework\lib\DependencyInjection;
 use framework\lib\request\Request;
+use JetBrains\PhpStorm\Pure;
 
 class Router
 {
     private RouteContainer $routes;
     private Request $request;
 
-    public function __construct(DependencyInjection $di)
+    #[Pure] public function __construct(DependencyInjection $di)
     {
         $this->routes = $di->getRegisteredRoutes();
         $this->request = $di->getRequest();
     }
 
+    /**
+     * @throws RouteNotFoundException
+     */
     public function printContent(): string
     {
         $routes = $this->routes;

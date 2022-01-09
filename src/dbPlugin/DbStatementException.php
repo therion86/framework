@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace framework\lib\database;
+namespace framework\src\dbPlugin;
 
 use Exception;
 

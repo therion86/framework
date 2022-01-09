@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace framework\lib;
 
-use framework\lib\database\DbHandler;
+use framework\lib\modules\ModuleRegistererInterface;
+use framework\lib\plugins\PluginContainer;
+use framework\lib\plugins\PluginRegistererInterface;
 use framework\lib\request\Request;
 use framework\lib\routing\RouteContainer;
-use framework\src\ModuleRegisterer;
+use JetBrains\PhpStorm\Pure;
 
 class DependencyInjection
 {
 
     private ?Request $request;
     private RouteContainer $registeredRoutes;
-    private ?DbHandler $dbHandler;
+    private PluginContainer $pluginContainer;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->registeredRoutes = new RouteContainer();
+        $this->pluginContainer = new PluginContainer();
     }
 
-    public function getRequest(): Request
+    #[Pure] public function getRequest(): Request
     {
         return $this->request ?? new Request();
     }
@@ -31,18 +34,16 @@ class DependencyInjection
         return $this->registeredRoutes;
     }
 
-    public function registerModules()
+    public function register(ModuleRegistererInterface $moduleRegisterer, ?PluginRegistererInterface $pluginRegisterer): void
     {
-        $moduleRegisterer = new ModuleRegisterer($this);
-        $moduleRegisterer->registerModules();
+        if (null !== $pluginRegisterer) {
+            $pluginRegisterer->registerPlugins($this->getPluginContainer());
+        }
+        $moduleRegisterer->registerModules($this->getPluginContainer());
     }
 
-    public function getDatabaseHandler(): DbHandler
+    public function getPluginContainer(): PluginContainer
     {
-        if (null !== $this->dbHandler) {
-            return $this->dbHandler;
-        }
-        $config = json_decode(file_get_contents(__DIR__ . '/../dbConfig.json'), true);
-        return $this->dbHandler = new DbHandler($config['dsn'], $config['user'], $config['password']);
+        return $this->pluginContainer;
     }
 }

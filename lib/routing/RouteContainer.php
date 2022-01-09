@@ -9,6 +9,9 @@ class RouteContainer
 {
     private array $routes = [];
 
+    /**
+     * @throws RouteAlreadyExistsException
+     */
     public function addRoute(string $routeUrl, string $type, callable $commandCreateFunction): void
     {
         $route = new Route($routeUrl, $type, $commandCreateFunction);
