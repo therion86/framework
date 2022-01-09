@@ -4,8 +4,16 @@
       "framework\\": ""
     }
   },
-  "name": "therion/radio",
-  "description": "",
+  "name": "therion/framework",
+  "description": "A small Framework for php",
+  "type": "library",
+  "license": "GPL",
+  "authors": [
+    {
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  ],
   "config": {
     "platform": {
       "php": "7.4"
