@@ -7,11 +7,11 @@
   "name": "therion/framework",
   "description": "A small Framework for php",
   "type": "library",
-  "license": "GPL",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
-      "name": "John Doe",
-      "email": "john@example.com"
+      "name": "Sascha Emmrich",
+      "email": "sascha.emmrich@nightshift-alternativ.de"
     }
   ],
   "config": {
