@@ -1,17 +1,22 @@
 <?php
+declare(strict_types=1);
+require_once 'autoload.php';
 
-require "vendor/autoload.php";
+use Framework\Application;
+use Framework\DependencyInjection\HttpDependencyInjection;
+use Framework\Enums\AppType;
 
-$di = new \framework\lib\DependencyInjection();
+
+if (! file_exists(__DIR__ . '/config/loadedModules.php')) {
+    throw new Exception('The app has no loadedModules.php');
+}
+$loadedModules = include 'config/loadedModules.php';
+$di = Application::registerApp(AppType::HTTP, $loadedModules);
 try {
-    $router = new \framework\lib\routing\Router($di);
-    $di->register(new \framework\src\ModuleRegisterer($di), new \framework\src\PluginRegisterer());
-    echo $router->printContent();
-} catch (Exception $e) {
-    header($_SERVER["SERVER_PROTOCOL"] . ' 500 Internal Server Error', true, 500);
-    echo json_encode([
-        'message' => $e->getMessage(),
-        'stack' => $e->getTraceAsString(),
-        'code' => $e->getCode()
-    ]);
+    /* @var HttpDependencyInjection $di */
+    $di->getRouter()->route()->send();
+} catch (Exception $exception) {
+    echo "<pre>";
+    echo $exception->getTraceAsString();
+    echo "</pre>";
 }

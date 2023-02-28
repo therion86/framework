@@ -1,6 +1,2 @@
-/vendor/
-/templates_c/
-/session/
-/.idea/
-/composer.phar
-/.htaccess
+/logs/
+/docker/
