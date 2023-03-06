@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Example;
+namespace App\Http\Example;
 
-use App\Example\Handler\ExampleHandler;
+use App\Http\Example\Handler\ExampleHandler;
 use Framework\DependencyInjection\DependencyInjection;
-use Framework\DependencyInjection\DI;
 use Framework\Interfaces\ModuleFactoryInterface;
 use Framework\Routing\Router;
 

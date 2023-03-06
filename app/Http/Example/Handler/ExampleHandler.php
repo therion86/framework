@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Example\Handler;
-
+namespace App\Http\Example\Handler;
 
 use Framework\Interfaces\HandlerInterface;
 use Framework\Interfaces\RequestInterface;

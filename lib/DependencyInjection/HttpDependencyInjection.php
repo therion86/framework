@@ -2,6 +2,7 @@
 
 namespace Framework\DependencyInjection;
 
+use Exception;
 use Framework\Interfaces\ModuleFactoryInterface;
 use Framework\Interfaces\RequestInterface;
 use Framework\Interfaces\ResponseInterface;
@@ -23,7 +24,7 @@ class HttpDependencyInjection extends DependencyInjection
         foreach ($loadedModules as $loadedModule) {
             $moduleFactory = new $loadedModule($this);
             if (! $moduleFactory instanceof ModuleFactoryInterface) {
-                throw new \Exception('Provided module factory must implement ModuleFactoryInterface');
+                throw new Exception('Provided module factory must implement ModuleFactoryInterface');
             }
             $moduleFactory->registerRoutes($this->router);
         }
