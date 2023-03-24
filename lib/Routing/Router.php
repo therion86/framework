@@ -68,7 +68,9 @@ class Router
             );
             if (! preg_match('#' . str_replace('/', '\\/', $routeUri) . '#', $this->requestPath, $routeParameters)) {
                 $route = null;
+                continue;
             }
+            break;
         }
         if (null === $route) {
             throw new RouteNotFoundException('Route for uri ' . $this->requestUri . ' not found!');
