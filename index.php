@@ -16,7 +16,7 @@ if (! file_exists(__DIR__ . '/config/services.php.php')) {
 }
 
 $loadedModules = include 'config/modules.php';
-$loadedServices = include 'config/services.php.php';
+$loadedServices = include 'config/services.php';
 
 $di = Application::registerApp(AppType::HTTP, $loadedModules, $loadedServices);
 try {
