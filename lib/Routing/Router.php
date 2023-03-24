@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Framework\Routing;
 
 use Framework\DependencyInjection\DependencyInjection;
+use Framework\DependencyInjection\HttpDependencyInjection;
 use Framework\Exceptions\ClassNotRegisteredException;
 use Framework\Exceptions\HandlerNotFoundException;
 use Framework\Exceptions\RouteAlreadyExistsException;
@@ -13,6 +14,7 @@ use Framework\Interfaces\HandlerInterface;
 use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
 use Framework\Interfaces\ResponseInterface;
 use Framework\Interfaces\RouteNotFoundException;
+use Framework\Request\HttpRequest;
 use ReflectionException;
 
 class Router
@@ -32,7 +34,7 @@ class Router
 
     private string $requestType;
 
-    public function __construct(private DependencyInjection $di)
+    public function __construct(private HttpDependencyInjection $di)
     {
         $this->requestUri = $_SERVER['REQUEST_URI'];
         $this->basePath = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
@@ -64,7 +66,7 @@ class Router
                 array_map(fn($name) => '(?<$1>' . $name . ')', $parameterValues),
                 $route->getUri()
             );
-            if (! preg_match('#' . str_replace('/', '\\/', $routeUri) . '#', $this->requestPath)) {
+            if (! preg_match('#' . str_replace('/', '\\/', $routeUri) . '#', $this->requestPath, $routeParameters)) {
                 $route = null;
             }
         }
@@ -79,7 +81,8 @@ class Router
         if (!$handler instanceof HandlerInterface) {
             throw new HandlerInterfaceNotFullfilledException('Handler must implement HandlerInterface!');
         }
-        return $handler->execute($this->di->getRequest(), $this->di->generateResponse());
+        $request = HttpRequest::fromGlobals($routeParameters);
+        return $handler->execute($request, $this->di->generateResponse());
     }
 
     private function registerRoute(Route $route): void

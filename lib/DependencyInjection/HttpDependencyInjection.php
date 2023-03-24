@@ -18,7 +18,6 @@ class HttpDependencyInjection extends DependencyInjection
     public function __construct(array $loadedModules, array $loadedServices)
     {
         parent::__construct();
-        $this->request = HttpRequest::fromGlobals();
         $this->router = new Router($this);
         foreach ($loadedModules as $loadedModule) {
             $moduleFactory = new $loadedModule($this);
@@ -30,11 +29,6 @@ class HttpDependencyInjection extends DependencyInjection
         foreach ($loadedServices as $serviceName => $constructionParameters) {
             $this->getContainer()->register($serviceName, $constructionParameters);
         }
-    }
-
-    public function getRequest(): RequestInterface
-    {
-        return $this->request;
     }
 
     public function getRouter(): Router

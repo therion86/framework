@@ -10,17 +10,18 @@ class HttpRequest implements RequestInterface
         private string $method,
         private string $uri,
         private array $headers = [],
-        private array $params = []
+        private array $params = [],
+        private array $routeParameters = []
     ) {
     }
 
-    public static function fromGlobals(): self
+    public static function fromGlobals(array $routeParameters): self
     {
         $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'get');
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $headers = getallheaders() ?? [];
         $params = array_merge($_GET, $_POST);
-        return new self($method, $uri, $headers, $params);
+        return new self($method, $uri, $headers, $params, $routeParameters);
     }
 
     public function getMethod(): string
@@ -41,6 +42,11 @@ class HttpRequest implements RequestInterface
     public function getParameter(string $parameterName): ?string
     {
         return $this->params[$parameterName] ?? null;
+    }
+
+    public function getRouteParameter(string $parameterName): ?string
+    {
+        return $this->routeParameters[$parameterName] ?? null;
     }
 
     public function getParameters(): array

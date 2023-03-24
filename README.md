@@ -66,4 +66,10 @@ Second param is the uri like ``/example``
 
 Third param is the Handler you want to call with this route
 
-The last param is an array of your route parameters which are defined in the uri like ``/example/{id}`` (NOT IMPLEMENTED YET)
+The last param is an array of your route parameters:
+- if your uri is like ``/example/{id}/something``
+- The array needs to look like: ``['id' => '\d+']`` 
+- The key is the name as defined in your route uri and the value is the regular expression for this variable (so you can add anything you want for this variable and it will be availabel in request as routeParameter)
+
+
+
