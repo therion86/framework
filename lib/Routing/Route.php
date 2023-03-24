@@ -16,7 +16,7 @@ class Route
 
     public function getUri(): string
     {
-        return preg_replace('#{(\w+)}#', '(?<$1>\d+)', $this->uri);
+        return $this->uri;
     }
 
     public function getMethod(): string
