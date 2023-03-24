@@ -2,3 +2,6 @@
 /docker/
 /vendor/
 /framework-db/
+config/modules.php
+config/services.php
+app/Services/MysqlService.php
