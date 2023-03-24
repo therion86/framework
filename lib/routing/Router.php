@@ -21,7 +21,6 @@ class Router
     private const PUT = 'PUT';
     private const DELETE = 'DELETE';
 
-
     private string $requestUri;
     private string $requestPath;
     private string $basePath;
@@ -33,7 +32,7 @@ class Router
     public function __construct(private DependencyInjection $di)
     {
         $this->requestUri = $_SERVER['REQUEST_URI'];
-        $this->basePath = str_replace('/cli.php', '', $_SERVER['SCRIPT_NAME']);
+        $this->basePath = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
         $requestPath = str_replace($this->basePath, '', $this->requestUri);
         $this->requestPath = strtok($requestPath, '?');
     }

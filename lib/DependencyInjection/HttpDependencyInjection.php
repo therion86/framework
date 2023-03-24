@@ -15,8 +15,7 @@ class HttpDependencyInjection extends DependencyInjection
     private Router $router;
     private RequestInterface $request;
 
-
-    public function __construct(array $loadedModules)
+    public function __construct(array $loadedModules, array $loadedServices)
     {
         parent::__construct();
         $this->request = HttpRequest::fromGlobals();
@@ -27,6 +26,9 @@ class HttpDependencyInjection extends DependencyInjection
                 throw new Exception('Provided module factory must implement ModuleFactoryInterface');
             }
             $moduleFactory->registerRoutes($this->router);
+        }
+        foreach ($loadedServices as $serviceName => $constructionParameters) {
+            $this->getContainer()->register($serviceName, $constructionParameters);
         }
     }
 

@@ -14,7 +14,6 @@ class HttpRequest implements RequestInterface
     ) {
     }
 
-
     public static function fromGlobals(): self
     {
         $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'get');
@@ -23,7 +22,6 @@ class HttpRequest implements RequestInterface
         $params = array_merge($_GET, $_POST);
         return new self($method, $uri, $headers, $params);
     }
-
 
     public function getMethod(): string
     {

@@ -1,2 +1,4 @@
 /logs/
 /docker/
+/vendor/
+/framework-db/

@@ -1,17 +1,24 @@
 <?php
 declare(strict_types=1);
-require_once 'autoload.php';
+require_once 'vendor/autoload.php';
 
 use Framework\Application;
 use Framework\DependencyInjection\HttpDependencyInjection;
 use Framework\Enums\AppType;
 
 
-if (! file_exists(__DIR__ . '/config/loadedModules.php')) {
-    throw new Exception('The app has no loadedModules.php');
+if (! file_exists(__DIR__ . '/config/modules.php')) {
+    throw new Exception('The app has no modules.php in folder config');
 }
-$loadedModules = include 'config/loadedModules.php';
-$di = Application::registerApp(AppType::HTTP, $loadedModules);
+
+if (! file_exists(__DIR__ . '/config/services.php.php')) {
+    throw new Exception('The app has no services.php in folder config');
+}
+
+$loadedModules = include 'config/modules.php';
+$loadedServices = include 'config/services.php.php';
+
+$di = Application::registerApp(AppType::HTTP, $loadedModules, $loadedServices);
 try {
     /* @var HttpDependencyInjection $di */
     $di->getRouter()->route()->send();
