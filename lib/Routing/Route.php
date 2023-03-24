@@ -8,7 +8,6 @@ class Route
 {
     public function __construct(
         private string $uri,
-        private string $routeName,
         private string $method,
         private array $parameters,
         private string $handler
@@ -17,12 +16,7 @@ class Route
 
     public function getUri(): string
     {
-        return $this->uri;
-    }
-
-    public function getRouteName(): string
-    {
-        return $this->routeName;
+        return preg_replace('#{(\w+)}#', '(?<$1>\d+)', $this->uri);
     }
 
     public function getMethod(): string

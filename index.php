@@ -11,12 +11,12 @@ if (! file_exists(__DIR__ . '/config/modules.php')) {
     throw new Exception('The app has no modules.php in folder config');
 }
 
-if (! file_exists(__DIR__ . '/config/services.php.php')) {
+if (! file_exists(__DIR__ . '/config/services.php')) {
     throw new Exception('The app has no services.php in folder config');
 }
 
-$loadedModules = include 'config/modules.php';
-$loadedServices = include 'config/services.php';
+$loadedModules = include __DIR__ . '/config/modules.php';
+$loadedServices = include __DIR__ . '/config/services.php';
 
 $di = Application::registerApp(AppType::HTTP, $loadedModules, $loadedServices);
 try {

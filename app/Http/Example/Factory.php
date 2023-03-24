@@ -16,6 +16,6 @@ class Factory implements ModuleFactoryInterface
 
     public function registerRoutes(Router $router): void
     {
-        $router->registerGetRoute('exampleRoute', '/', ExampleHandler::class, []);
+        $router->registerGetRoute( '/', ExampleHandler::class, []);
     }
 }
