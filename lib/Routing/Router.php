@@ -66,7 +66,7 @@ class Router
                 array_map(fn($name) => '(?<$1>' . $name . ')', $parameterValues),
                 $route->getUri()
             );
-            if (! preg_match('#' . str_replace('/', '\\/', $routeUri) . '#', $this->requestPath, $routeParameters)) {
+            if (! preg_match('#^' . str_replace('/', '\\/', $routeUri) . '$#', $this->requestPath, $routeParameters)) {
                 $route = null;
                 continue;
             }
