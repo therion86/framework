@@ -13,4 +13,10 @@ interface ResponseInterface
     public function setHeaders(array $headers): self;
 
     public function setStatusCode(int $statusCode): self;
+
+    public function getBody(): string;
+
+    public function getHeaders(): array;
+
+    public function getStatusCode(): int;
 }
