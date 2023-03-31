@@ -11,7 +11,8 @@ class HttpRequest implements RequestInterface
         private string $uri,
         private array $headers = [],
         private array $params = [],
-        private array $routeParameters = []
+        private array $routeParameters = [],
+        private string $body = ''
     ) {
     }
 
@@ -21,7 +22,8 @@ class HttpRequest implements RequestInterface
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $headers = getallheaders() ?? [];
         $params = array_merge($_GET, $_POST);
-        return new self($method, $uri, $headers, $params, $routeParameters);
+        $body = file_get_contents('php://input');
+        return new self($method, $uri, $headers, $params, $routeParameters, $body);
     }
 
     public function getMethod(): string
@@ -52,5 +54,10 @@ class HttpRequest implements RequestInterface
     public function getParameters(): array
     {
         return $this->params;
+    }
+
+    public function getBody(): string
+    {
+        return $this->body;
     }
 }
