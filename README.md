@@ -71,6 +71,18 @@ The last param is an array of your route parameters:
 - The array needs to look like: ``['id' => '\d+']`` 
 - The key is the name as defined in your route uri and the value is the regular expression for this variable (so you can add anything you want for this variable and it will be availabel in request as routeParameter)
 
-### 10. Register your own request class
-You can register your own register class in the services php. Note there is no fromm globals, so you have to 
+### 10. Register your own request or response class
+You can Register your own request or response class by adding them to the di. There are two ways to add them: 
 
+services.php for whole project:
+```
+return [
+    HttpRequest::class, fn() => HttpRequest::fromGlobals(),
+    HttpResponse::class, fn() => new HttpResponse()
+];
+```
+in a module factory:
+```
+    $this->di->getContainer()->registerCallable(RequestInterface::class, fn() => HttpRequest::fromGlobals());
+    $this->di->getContainer()->registerCallable(ResponseInterface::class, fn() => new HttpResponse(''));
+```

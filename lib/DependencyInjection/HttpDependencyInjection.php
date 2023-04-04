@@ -30,7 +30,7 @@ class HttpDependencyInjection extends DependencyInjection
         }
         foreach ($loadedServices as $serviceName => $constructionParameters) {
             if (is_callable($constructionParameters)) {
-                $this->getContainer()->registerStatic($serviceName, $constructionParameters);
+                $this->getContainer()->registerCallable($serviceName, $constructionParameters);
                 continue;
             }
             $this->getContainer()->register($serviceName, $constructionParameters);
