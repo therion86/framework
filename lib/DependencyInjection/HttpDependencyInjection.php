@@ -9,7 +9,7 @@ use Framework\Interfaces\ModuleFactoryInterface;
 use Framework\Interfaces\RequestInterface;
 use Framework\Interfaces\ResponseInterface;
 use Framework\Request\HttpRequest;
-use Framework\Response\JsonResponse;
+use Framework\Response\HttpResponse;
 use Framework\Routing\Router;
 use Throwable;
 
@@ -42,11 +42,25 @@ class HttpDependencyInjection extends DependencyInjection
         return $this->router;
     }
 
-    // TODO: replaceable for requests and renaming to only Response (because there is no json :))
-
+    /**
+     * @throws Exception
+     */
     public function generateResponse(string $body = '', int $statusCode = 200, array $headers = []): ResponseInterface
     {
-        return new JsonResponse($body, $statusCode, $headers);
+        try {
+            $response = $this->getContainer()->loadCallable(ResponseInterface::class);
+        } catch (Throwable) {
+            $response = new HttpResponse('');
+        }
+
+        if (!$response instanceof ResponseInterface) {
+            throw new Exception('The registered response must be instance of ResponseInterface');
+        }
+
+        $response->setBody($body);
+        $response->setStatusCode($statusCode);
+        $response->setHeaders($headers);
+        return $response;
     }
 
     /**
@@ -55,7 +69,7 @@ class HttpDependencyInjection extends DependencyInjection
     public function getRequest(): HttpRequestInterface
     {
         try {
-            $request = $this->getContainer()->loadStatic(HttpRequestInterface::class);
+            $request = $this->getContainer()->loadCallable(HttpRequestInterface::class);
         } catch (Throwable) {
             // Default use HttpRequest if no request was set in di container
             $request = HttpRequest::fromGlobals();

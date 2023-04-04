@@ -47,7 +47,7 @@ class DependencyInceptionContainer
         return $this->getDependenciesByReflection($className);
     }
 
-    public function loadStatic(string $className): object
+    public function loadCallable(string $className): object
     {
         if (!isset($this->statics[$className])) {
             throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');

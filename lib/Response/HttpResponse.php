@@ -4,7 +4,7 @@ namespace Framework\Response;
 
 use Framework\Interfaces\ResponseInterface;
 
-class JsonResponse implements ResponseInterface
+class HttpResponse implements ResponseInterface
 {
 
     public function __construct(
