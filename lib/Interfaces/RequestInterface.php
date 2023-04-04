@@ -4,7 +4,7 @@ namespace Framework\Interfaces;
 
 interface RequestInterface
 {
-    public static function fromGlobals(array $routeParameters): self;
+    public static function fromGlobals(): self;
 
     public function getParameter(string $parameterName): ?string;
 

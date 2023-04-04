@@ -51,6 +51,7 @@ class Router
      * @throws ReflectionException
      * @throws ClassNotRegisteredException
      * @throws ConstructorParameterTypeNotFoundException
+     * @throws \Exception
      */
     public function route(): ResponseInterface
     {
@@ -58,6 +59,7 @@ class Router
             throw new RouteNotFoundException('Route for uri ' . $this->requestUri . ' not found!');
         }
         $route = null;
+        $routeParameters = [];
         foreach ($this->routes[$this->requestType] as $route) {
             $parameterNames = array_keys($route->getParameters());
             $parameterValues = array_values($route->getParameters());
@@ -66,7 +68,7 @@ class Router
                 array_map(fn($name) => '(?<$1>' . $name . ')', $parameterValues),
                 $route->getUri()
             );
-            if (! preg_match('#^' . str_replace('/', '\\/', $routeUri) . '$#', $this->requestPath, $routeParameters)) {
+            if (!preg_match('#^' . str_replace('/', '\\/', $routeUri) . '$#', $this->requestPath, $routeParameters)) {
                 $route = null;
                 continue;
             }
@@ -83,8 +85,11 @@ class Router
         if (!$handler instanceof HandlerInterface) {
             throw new HandlerInterfaceNotFullfilledException('Handler must implement HandlerInterface!');
         }
-        $request = HttpRequest::fromGlobals($routeParameters);
-        return $handler->execute($request, $this->di->generateResponse());
+
+        return $handler->execute(
+            $this->di->getRequest()->setRouteParameters($routeParameters),
+            $this->di->generateResponse()
+        );
     }
 
     private function registerRoute(Route $route): void

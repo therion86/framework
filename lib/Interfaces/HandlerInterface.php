@@ -6,5 +6,5 @@ namespace Framework\Interfaces;
 
 interface HandlerInterface
 {
-    public function execute(RequestInterface $request, ResponseInterface $response): ResponseInterface;
+    public function execute(HttpRequestInterface $request, ResponseInterface $response): ResponseInterface;
 }

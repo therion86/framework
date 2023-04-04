@@ -6,6 +6,7 @@ namespace Framework\DependencyInjection;
 
 use Framework\Exceptions\ClassNotRegisteredException;
 use Framework\Interfaces\ConstructorParameterTypeNotFoundException;
+use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
 
@@ -14,13 +15,19 @@ class DependencyInceptionContainer
 
     private array $container = [];
     private array $parameters = [];
+    private array $statics = [];
 
     public function register(string $className, array $parameters = []): void
     {
         $this->container[$className] = $className;
-        if (! empty($parameters)) {
+        if (!empty($parameters)) {
             $this->parameters[$className] = $parameters;
         }
+    }
+
+    public function registerStatic(string $className, callable $staticCallMethod)
+    {
+        $this->statics[$className] = $staticCallMethod;
     }
 
     /**
@@ -39,6 +46,15 @@ class DependencyInceptionContainer
         }
         return $this->getDependenciesByReflection($className);
     }
+
+    public function loadStatic(string $className): object
+    {
+        if (!isset($this->statics[$className])) {
+            throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
+        }
+        return $this->statics[$className]();
+    }
+
 
     /**
      * @throws ClassNotRegisteredException
