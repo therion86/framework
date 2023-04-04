@@ -71,7 +71,14 @@ The last param is an array of your route parameters:
 - The array needs to look like: ``['id' => '\d+']`` 
 - The key is the name as defined in your route uri and the value is the regular expression for this variable (so you can add anything you want for this variable and it will be availabel in request as routeParameter)
 
-### 10. Register your own request or response class
+### 10. Register callables
+You can register callables in your di. For example for static inits of classes, like the ::fromGlobals() method of a request (see 11.)
+
+You can just register them by using the ```registerCallable(string $className, callable $callback)``` method of the Container.
+
+You can load the entry by using the ```loadCallable(string $className)``` from the container. Note the method executes the callable method.
+
+### 11. Register your own request or response class
 You can Register your own request or response class by adding them to the di. There are two ways to add them: 
 
 services.php for whole project:

@@ -25,9 +25,9 @@ class DependencyInceptionContainer
         }
     }
 
-    public function registerCallable(string $className, callable $staticCallMethod)
+    public function registerCallable(string $className, callable $callable): void
     {
-        $this->statics[$className] = $staticCallMethod;
+        $this->statics[$className] = $callable;
     }
 
     /**
