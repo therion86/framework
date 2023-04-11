@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ec1e774e3e24544cba665d50e7103b6",
+    "content-hash": "2f0840f33f626d9216b5d3fc8601a3a3",
     "packages": [
         {
             "name": "doctrine/deprecations",
@@ -583,32 +583,34 @@
         },
         {
             "name": "phpspec/prophecy-phpunit",
-            "version": "v2.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy-phpunit.git",
-                "reference": "2d7a9df55f257d2cba9b1d0c0963a54960657177"
+                "reference": "0d06c84b9f26aab2b9940354f0fe6037dd9799c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy-phpunit/zipball/2d7a9df55f257d2cba9b1d0c0963a54960657177",
-                "reference": "2d7a9df55f257d2cba9b1d0c0963a54960657177",
+                "url": "https://api.github.com/repos/phpspec/prophecy-phpunit/zipball/0d06c84b9f26aab2b9940354f0fe6037dd9799c3",
+                "reference": "0d06c84b9f26aab2b9940354f0fe6037dd9799c3",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8",
-                "phpspec/prophecy": "^1.3",
-                "phpunit/phpunit": "^9.1"
+                "php": ">=5.3.3",
+                "phpspec/prophecy": "~1.3"
+            },
+            "suggest": {
+                "phpunit/phpunit": "if it is not installed globally"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Prophecy\\PhpUnit\\": "src"
+                    "Prophecy\\PhpUnit\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -621,7 +623,7 @@
                     "email": "stof@notk.org"
                 }
             ],
-            "description": "Integrating the Prophecy mocking library in PHPUnit test cases",
+            "description": "PhpUnit test case integrating the Prophecy mocking library",
             "homepage": "http://phpspec.net",
             "keywords": [
                 "phpunit",
@@ -629,9 +631,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/prophecy-phpunit/issues",
-                "source": "https://github.com/phpspec/prophecy-phpunit/tree/v2.0.1"
+                "source": "https://github.com/phpspec/prophecy-phpunit/tree/master"
             },
-            "time": "2020-07-09T08:33:42+00:00"
+            "time": "2015-02-09T11:20:26+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
