@@ -1,21 +1,23 @@
 # Framework
-
 Ongoing work
-AppType::CLI is currently not working you can only use HTTP
+
 
 ## How to Use
 
 ### 1.Install
 ``composer require therion/framework``
 ### 2. Config
-You need to add 2 files who return arrays:
+You need to add 2 files who return arrays for http:
 1. modules.php which returns the classnames of your moduleFactories
 2. services.php which returns your services you need (ex. MysqlServce, MongoService etc.)
+
+You need one additoinal file which retunrs an array for cli:
+cli-modules.php which returns the classnames for your cliModuleFactories
 
 ### 3. Load Application in your index.php
 ``$di = Application::registerApp(AppType::HTTP, $loadedModules, $loadedServices);``
 
-AppType::CLI is currently not working you can only use HTTP
+``$di = Application::registerApp(AppType::CLI, $loadedCliModules, $loadedServices);``
 
 ### 4. Load your routes
 `` 
@@ -93,3 +95,11 @@ in a module factory:
     $this->di->getContainer()->registerCallable(RequestInterface::class, fn() => HttpRequest::fromGlobals());
     $this->di->getContainer()->registerCallable(ResponseInterface::class, fn() => new HttpResponse(''));
 ```
+
+## AppType:Cli
+The cli part is the same as the http part with some changes. You always have the "cli" in the name of your interfaces:
+``CliHandlerInterface``, ``CliModuleFactoryInterface``
+
+DI and other Classes are nearly the same. Only difference in handlers, you will not have a return in your execute method. And you don't have a Request but ``Arguments`` which is a wrapper class for your ``$argv``
+
+You can always use the CliFunctions in your CliHandlers, they are injected by default

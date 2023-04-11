@@ -2,10 +2,43 @@
 
 namespace Framework\DependencyInjection;
 
+
+use Framework\Cli\Argument;
+use Framework\Cli\CliFunctions;
+use Framework\Interfaces\CliModuleFactoryInterface;
+use Framework\Routing\CliRouter;
+
 class CliDependencyInjection extends DependencyInjection
 {
-    public function __construct()
+    private CliRouter $router;
+
+    public function __construct(array $loadedModules, array $loadedServices)
     {
         parent::__construct();
+
+        $this->router = new CliRouter($this, new Argument($_SERVER['argv']));
+        foreach ($loadedModules as $loadedModule) {
+            $moduleFactory = new $loadedModule($this);
+            if (!$moduleFactory instanceof CliModuleFactoryInterface) {
+                throw new \Exception('Provided module factory must implement CliModuleFactoryInterface');
+            }
+            $moduleFactory->registerCommands($this->router);
+        }
+
+        foreach ($loadedServices as $serviceName => $constructionParameters) {
+            if (is_callable($constructionParameters)) {
+                $this->getContainer()->registerCallable($serviceName, $constructionParameters);
+                continue;
+            }
+            $this->getContainer()->register($serviceName, $constructionParameters);
+        }
+
+        // Always register cli functions for cli handler
+        $this->getContainer()->register(CliFunctions::class);
+    }
+
+    public function getRouter(): CliRouter
+    {
+        return $this->router;
     }
 }

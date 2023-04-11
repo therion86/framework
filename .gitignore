@@ -5,3 +5,4 @@
 config/modules.php
 config/services.php
 app/Services/MysqlService.php
+config/cli-modules.php

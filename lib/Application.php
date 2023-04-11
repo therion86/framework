@@ -16,7 +16,7 @@ class Application
     public static function registerApp(AppType $appType, array $loadedModules, array $loadedServices): DependencyInjection
     {
         return match ($appType) {
-            AppType::CLI => new CliDependencyInjection(),
+            AppType::CLI => new CliDependencyInjection($loadedModules, $loadedServices),
             AppType::HTTP => new HttpDependencyInjection($loadedModules, $loadedServices)
         };
     }
