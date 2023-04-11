@@ -1,6 +1,6 @@
 # Framework
 Ongoing work
-
+<img alt="Tests Passing" src="https://github.com/therion86/github-readme-stats/workflows/Test/badge.svg" />
 
 ## How to Use
 
