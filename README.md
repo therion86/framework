@@ -1,5 +1,5 @@
 # Framework
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=therion86)](https://github.com/anuraghazra/github-readme-stats)
+[![Unit](https://github.com/therion86/framework/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/therion86/framework/actions/workflows/php.yml)
 
 ## How to Use
 
