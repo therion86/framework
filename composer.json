@@ -1,7 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "Framework\\" : "lib",
+      "Framework\\": "lib",
       "App\\": "app"
     }
   },
@@ -13,7 +13,14 @@
   "name": "therion/framework",
   "description": "A small Framework",
   "license": "MIT",
-  "authors": [{"name": "Sascha Emmrich"}],
+  "authors": [
+    {
+      "name": "Therion86"
+    }
+  ],
+  "scripts": {
+    "test" : "vendor/bin/phpunit ./tests"
+  },
   "config": {
     "platform": {
       "php": "8.1"
@@ -23,8 +30,7 @@
     "php": ">=8.1",
     "phpunit/phpunit": "^9.6",
     "phpspec/prophecy-phpunit": "^1.1.0"
-  }
-  ,
+  },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
   }
