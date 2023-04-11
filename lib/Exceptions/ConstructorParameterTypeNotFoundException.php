@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Interfaces;
+namespace Framework\Exceptions;
 
 use Exception;
 

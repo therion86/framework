@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Framework\DependencyInjection;
 
 use Framework\Exceptions\ClassNotRegisteredException;
-use Framework\Interfaces\ConstructorParameterTypeNotFoundException;
-use InvalidArgumentException;
+use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use ReflectionClass;
 use ReflectionException;
 

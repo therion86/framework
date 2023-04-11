@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Framework\Routing;
 
-use Framework\DependencyInjection\DependencyInjection;
 use Framework\DependencyInjection\HttpDependencyInjection;
 use Framework\Exceptions\ClassNotRegisteredException;
 use Framework\Exceptions\HandlerNotFoundException;
 use Framework\Exceptions\RouteAlreadyExistsException;
-use Framework\Interfaces\ConstructorParameterTypeNotFoundException;
+use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use Framework\Interfaces\HandlerInterface;
 use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
 use Framework\Interfaces\ResponseInterface;
 use Framework\Interfaces\RouteNotFoundException;
-use Framework\Request\HttpRequest;
 use ReflectionException;
 
 class Router
@@ -94,7 +92,7 @@ class Router
 
     private function registerRoute(Route $route): void
     {
-        if (isset($this->routes[$route->getUri()][$route->getMethod()])) {
+        if (isset($this->routes[$route->getMethod()][$route->getUri()])) {
             throw new RouteAlreadyExistsException(
                 sprintf('Route % for method %s already exists!', $route->getUri(), $route->getMethod())
             );
