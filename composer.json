@@ -19,7 +19,7 @@
     }
   ],
   "scripts": {
-    "test" : "vendor/bin/phpunit --configuration /var/www/framework/phpunit.xml tests/"
+    "test" : "vendor/bin/phpunit --configuration phpunit.xml tests/"
   },
   "config": {
     "platform": {
