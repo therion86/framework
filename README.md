@@ -1,5 +1,5 @@
 # Framework
-Ongoing work
+[![Unit](https://github.com/therion86/framework/actions/workflows/php.yml/badge.svg)](https://github.com/therion86/framework/actions/workflows/php.yml)
 
 
 ## How to Use
