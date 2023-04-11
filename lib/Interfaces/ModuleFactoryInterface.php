@@ -2,11 +2,14 @@
 
 namespace Framework\Interfaces;
 
-use Framework\Routing\Router;
+use Framework\Routing\HttpRouter;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface ModuleFactoryInterface
 {
 
-    public function registerRoutes(Router $router): void;
+    public function registerRoutes(HttpRouter $router): void;
 
 }

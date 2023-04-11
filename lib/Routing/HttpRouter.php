@@ -6,21 +6,22 @@ namespace Framework\Routing;
 
 use Framework\DependencyInjection\HttpDependencyInjection;
 use Framework\Exceptions\ClassNotRegisteredException;
+use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
+use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
 use Framework\Exceptions\HandlerNotFoundException;
 use Framework\Exceptions\RouteAlreadyExistsException;
-use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
+use Framework\Exceptions\RouteNotFoundException;
 use Framework\Interfaces\HandlerInterface;
-use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
 use Framework\Interfaces\ResponseInterface;
-use Framework\Interfaces\RouteNotFoundException;
 use ReflectionException;
 
-class Router
+class HttpRouter
 {
     private const GET = 'GET';
     private const POST = 'POST';
     private const PUT = 'PUT';
     private const DELETE = 'DELETE';
+    private const PATCH = 'PATCH';
 
     private string $requestUri;
     private string $requestPath;
@@ -117,6 +118,13 @@ class Router
     public function registerPutRoute(string $routeUri, string $handler, array $parameters): self
     {
         $route = new Route($routeUri, self::PUT, $parameters, $handler);
+        $this->registerRoute($route);
+        return $this;
+    }
+
+    public function registerPatchRoute(string $routeUri, string $handler, array $parameters): self
+    {
+        $route = new Route($routeUri, self::PATCH, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
     }

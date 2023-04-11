@@ -4,6 +4,8 @@ namespace Framework\Request;
 
 use Framework\Interfaces\HttpRequestInterface;
 
+use function getallheaders;
+
 class HttpRequest implements HttpRequestInterface
 {
     private array $routeParameters = [];
@@ -21,7 +23,17 @@ class HttpRequest implements HttpRequestInterface
     {
         $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'get');
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
-        $headers = getallheaders() ?? [];
+        $headers = null;
+
+        if (function_exists('\getallheaders')) {
+            // @codeCoverageIgnoreStart
+            $headers = \getallheaders();
+            // @codeCoverageIgnoreEnd
+        }
+
+        if (!is_array($headers)) {
+            $headers = [];
+        }
         $params = array_merge($_GET, $_POST);
         $body = file_get_contents('php://input');
         return new self($method, $uri, $headers, $params, $body);

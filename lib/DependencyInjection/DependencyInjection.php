@@ -5,15 +5,15 @@ namespace Framework\DependencyInjection;
 abstract class DependencyInjection
 {
 
-    private DependencyInceptionContainer $container;
+    private DependencyInjectionContainer $container;
 
     public function __construct()
     {
-        $this->container = new DependencyInceptionContainer();
+        $this->container = new DependencyInjectionContainer();
     }
 
 
-    public function getContainer(): DependencyInceptionContainer
+    public function getContainer(): DependencyInjectionContainer
     {
         return $this->container;
     }

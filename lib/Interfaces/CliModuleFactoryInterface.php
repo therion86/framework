@@ -4,6 +4,9 @@ namespace Framework\Interfaces;
 
 use Framework\Routing\CliRouter;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface CliModuleFactoryInterface
 {
 

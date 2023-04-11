@@ -2,6 +2,9 @@
 
 namespace Framework\Interfaces;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface HttpRequestInterface extends RequestInterface
 {
     public function getRouteParameter(string $parameterName): ?string;

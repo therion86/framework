@@ -7,7 +7,7 @@ use Framework\DependencyInjection\DependencyInjection;
 use Framework\Interfaces\ModuleFactoryInterface;
 use Framework\Interfaces\RequestInterface;
 use Framework\Request\HttpRequest;
-use Framework\Routing\Router;
+use Framework\Routing\HttpRouter;
 
 class Factory implements ModuleFactoryInterface
 {
@@ -16,7 +16,7 @@ class Factory implements ModuleFactoryInterface
         $this->di->getContainer()->register(ExampleHandler::class);
     }
 
-    public function registerRoutes(Router $router): void
+    public function registerRoutes(HttpRouter $router): void
     {
         $router->registerGetRoute( '/{id}', ExampleHandler::class, ['id' => '\d+']);
     }

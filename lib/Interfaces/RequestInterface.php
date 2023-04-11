@@ -2,6 +2,9 @@
 
 namespace Framework\Interfaces;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface RequestInterface
 {
     public static function fromGlobals(): self;

@@ -10,17 +10,17 @@ use Framework\Interfaces\RequestInterface;
 use Framework\Interfaces\ResponseInterface;
 use Framework\Request\HttpRequest;
 use Framework\Response\HttpResponse;
-use Framework\Routing\Router;
+use Framework\Routing\HttpRouter;
 use Throwable;
 
 class HttpDependencyInjection extends DependencyInjection
 {
-    private Router $router;
+    private HttpRouter $router;
 
     public function __construct(array $loadedModules, array $loadedServices)
     {
         parent::__construct();
-        $this->router = new Router($this);
+        $this->router = new HttpRouter($this);
         foreach ($loadedModules as $loadedModule) {
             $moduleFactory = new $loadedModule($this);
             if (!$moduleFactory instanceof ModuleFactoryInterface) {
@@ -37,7 +37,7 @@ class HttpDependencyInjection extends DependencyInjection
         }
     }
 
-    public function getRouter(): Router
+    public function getRouter(): HttpRouter
     {
         return $this->router;
     }

@@ -11,8 +11,8 @@ use Framework\DependencyInjection\CliDependencyInjection;
 use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
 use Framework\Exceptions\HandlerNotFoundException;
 use Framework\Exceptions\RouteAlreadyExistsException;
+use Framework\Exceptions\RouteNotFoundException;
 use Framework\Interfaces\CliHandlerInterface;
-use Framework\Interfaces\RouteNotFoundException;
 
 class CliRouter
 {
@@ -25,7 +25,7 @@ class CliRouter
     {
     }
 
-    public function route()
+    public function route(): void
     {
 
         if (false === $this->methodParams->getMethod()) {
@@ -43,7 +43,7 @@ class CliRouter
 
         $handler = $this->di->getContainer()->load($handler);
         if (!$handler instanceof CliHandlerInterface) {
-            throw new HandlerInterfaceNotFullfilledException('Handler must implement HandlerInterface!');
+            throw new HandlerInterfaceNotFullfilledException('Handler must implement CliModuleFactoryInterface!');
         }
 
         foreach ($route->getParameters() as $parameterName => $parameterDescription) {

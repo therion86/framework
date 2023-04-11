@@ -25,6 +25,7 @@ class CliDependencyInjection extends DependencyInjection
             $moduleFactory->registerCommands($this->router);
         }
 
+
         foreach ($loadedServices as $serviceName => $constructionParameters) {
             if (is_callable($constructionParameters)) {
                 $this->getContainer()->registerCallable($serviceName, $constructionParameters);

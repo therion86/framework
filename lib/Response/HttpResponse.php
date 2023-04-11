@@ -14,6 +14,9 @@ class HttpResponse implements ResponseInterface
     ) {
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function send(): void
     {
         // Setze den HTTP-Statuscode

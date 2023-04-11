@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Framework\Interfaces;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface ResponseInterface
 {
     public function send(): void;

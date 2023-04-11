@@ -9,7 +9,7 @@ use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use ReflectionClass;
 use ReflectionException;
 
-class DependencyInceptionContainer
+class DependencyInjectionContainer
 {
 
     private array $container = [];

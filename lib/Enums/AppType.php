@@ -2,6 +2,9 @@
 
 namespace Framework\Enums;
 
+/**
+ * @codeCoverageIgnore
+ */
 enum AppType
 {
      case CLI;

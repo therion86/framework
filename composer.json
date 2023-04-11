@@ -3,7 +3,11 @@
     "psr-4": {
       "Framework\\" : "lib",
       "App\\": "app"
-
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\": "tests"
     }
   },
   "name": "therion/framework",
@@ -16,6 +20,12 @@
     }
   },
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.1",
+    "phpunit/phpunit": "^9.6",
+    "phpspec/prophecy-phpunit": "*"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
   }
 }

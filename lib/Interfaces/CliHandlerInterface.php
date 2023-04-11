@@ -7,6 +7,9 @@ namespace Framework\Interfaces;
 
 use Framework\Cli\Argument;
 
+/**
+ * @codeCoverageIgnore
+ */
 interface CliHandlerInterface
 {
     public function execute(Argument $arguments): void;

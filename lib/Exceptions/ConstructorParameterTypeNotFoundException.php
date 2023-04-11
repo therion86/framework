@@ -6,6 +6,9 @@ namespace Framework\Exceptions;
 
 use Exception;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConstructorParameterTypeNotFoundException extends Exception
 {
 
