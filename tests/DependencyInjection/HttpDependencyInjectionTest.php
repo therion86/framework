@@ -66,7 +66,7 @@ class HttpDependencyInjectionTest extends TestCase
         );
     }
 
-    public function testServicesWhereAddedToContainer(): void
+    public function testServicesWhereAddedToContainerWithParams(): void
     {
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -104,6 +104,28 @@ class HttpDependencyInjectionTest extends TestCase
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('The registered request must be instance of RequestInterface');
-        $response = $di->getRequest('');
+        $di->getRequest('');
     }
+
+    public function testServicesWhereAddedToContainerAsClassName(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/1';
+        $_SERVER['SCRIPT_NAME'] = '/index.php';
+        $_SERVER['REQUEST_METHOD'] = 'get';
+        $di = new HttpDependencyInjection([], [TestInterface::class => TestClass::class]);
+
+        $this->assertInstanceOf(
+            TestClass::class,
+            $di->getContainer()->load(TestInterface::class)
+        );
+    }
+}
+class TestClass implements TestInterface {
+    public function testFunction(): void {
+
+    }
+}
+
+interface TestInterface {
+    public function testFunction(): void;
 }

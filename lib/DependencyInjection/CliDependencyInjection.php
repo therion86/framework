@@ -26,12 +26,16 @@ class CliDependencyInjection extends DependencyInjection
         }
 
 
-        foreach ($loadedServices as $serviceName => $constructionParameters) {
-            if (is_callable($constructionParameters)) {
-                $this->getContainer()->registerCallable($serviceName, $constructionParameters);
+        foreach ($loadedServices as $dependencyLabel => $registeredValue) {
+            if (is_callable($registeredValue)) {
+                $this->getContainer()->registerCallable($dependencyLabel, $registeredValue);
                 continue;
             }
-            $this->getContainer()->register($serviceName, $constructionParameters);
+            if (is_array($registeredValue)) {
+                $this->getContainer()->register($dependencyLabel, $dependencyLabel, $registeredValue);
+                continue;
+            }
+            $this->getContainer()->register($dependencyLabel, $registeredValue);
         }
 
         // Always register cli functions for cli handler

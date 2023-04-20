@@ -64,7 +64,7 @@ class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testServicesWhereAddedToContainer(): void
+    public function testServicesWhereAddedToContainerWithParam(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
         $di = new CliDependencyInjection([], [\Framework\Request\HttpRequest::class => ['', '', [], [], '']]);
@@ -75,4 +75,24 @@ class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    public function testServicesWhereAddedToContainerWithClassName(): void
+    {
+        $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
+        $di = new CliDependencyInjection([], [CliTestInterface::class => CliTestClass::class]);
+
+        $this->assertInstanceOf(
+            CliTestClass::class,
+            $di->getContainer()->load(CliTestInterface::class)
+        );
+    }
+}
+
+class CliTestClass implements CliTestInterface {
+    public function testFunction(): void {
+
+    }
+}
+
+interface CliTestInterface {
+    public function testFunction(): void;
 }
