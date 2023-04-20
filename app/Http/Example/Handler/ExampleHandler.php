@@ -10,8 +10,10 @@ use Framework\Interfaces\ResponseInterface;
 class ExampleHandler implements HandlerInterface
 {
 
-    public function execute(HttpRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function execute(
+        HttpRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         return $response->setBody('Hello World!');
     }
 }

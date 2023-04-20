@@ -28,7 +28,7 @@ class DependencyInceptionContainerTest extends TestCase
     public function testRegisterWithParams(): void
     {
         $dic = new DependencyInjectionContainer();
-        $dic->register(HttpRequest::class, ['', '', [],[],'']);
+        $dic->register(HttpRequest::class, HttpRequest::class, ['', '', [],[],'']);
 
         $this->assertInstanceOf(HttpRequest::class, $dic->load(HttpRequest::class));
     }

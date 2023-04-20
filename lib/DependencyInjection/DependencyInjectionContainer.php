@@ -16,9 +16,9 @@ class DependencyInjectionContainer
     private array $parameters = [];
     private array $statics = [];
 
-    public function register(string $className, array $parameters = []): void
+    public function register(string $classLabel, ?string $className = null, array $parameters = []): void
     {
-        $this->container[$className] = $className;
+        $this->container[$classLabel] = $className ?? $classLabel;
         if (!empty($parameters)) {
             $this->parameters[$className] = $parameters;
         }
