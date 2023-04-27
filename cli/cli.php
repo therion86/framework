@@ -1,8 +1,8 @@
 <?php
 
-use Framework\Application;
-use Framework\DependencyInjection\CliDependencyInjection;
-use Framework\Enums\AppType;
+use Therion86\Framework\Application;
+use Therion86\Framework\DependencyInjection\CliDependencyInjection;
+use Therion86\Framework\Enums\AppType;
 
 include_once __DIR__ . '/../vendor/autoload.php';
 

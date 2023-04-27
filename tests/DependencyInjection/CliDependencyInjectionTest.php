@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Test\DependencyInjection;
+namespace Therion86\Test\DependencyInjection;
 
-use App\Cli\Example\Factory;
-use App\Cli\Example\Handler\ExampleHandler;
+use Therion86\App\Cli\Example\Factory;
+use Therion86\App\Cli\Example\Handler\ExampleHandler;
 use Exception;
-use Framework\DependencyInjection\CliDependencyInjection;
+use Therion86\Framework\DependencyInjection\CliDependencyInjection;
 use stdClass;
 
 
 /**
- * @covers \Framework\DependencyInjection\CliDependencyInjection
+ * @covers \Therion86\Framework\DependencyInjection\CliDependencyInjection
  */
 class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,16 +24,6 @@ class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(CliDependencyInjection::class, $di);
     }
 
-    /**
-     * @return void
-     * @throws \Framework\Exceptions\ClassNotRegisteredException
-     * @throws \Framework\Exceptions\ConstructorParameterTypeNotFoundException
-     * @throws \Framework\Exceptions\HandlerInterfaceNotFullfilledException
-     * @throws \Framework\Exceptions\HandlerNotFoundException
-     * @throws \Framework\Exceptions\RouteNotFoundException
-     * @throws \ReflectionException
-     * @covers \Framework\DependencyInjection\DependencyInjection
-     */
     public function testModulesWhereAddedToContainer(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
@@ -50,28 +40,28 @@ class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Provided module factory must implement CliModuleFactoryInterface');
-        $di = new CliDependencyInjection([\App\Http\Example\Factory::class], []);
+        $di = new CliDependencyInjection([\Therion86\App\Http\Example\Factory::class], []);
     }
 
     public function testCallableServicesWhereAddedToContainer(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
-        $di = new CliDependencyInjection([], [\Framework\Request\HttpRequest::class => fn() => new stdClass()]);
+        $di = new CliDependencyInjection([], [\Therion86\Framework\Request\HttpRequest::class => fn() => new stdClass()]);
 
         $this->assertInstanceOf(
             stdClass::class,
-            $di->getContainer()->loadCallable(\Framework\Request\HttpRequest::class)
+            $di->getContainer()->loadCallable(\Therion86\Framework\Request\HttpRequest::class)
         );
     }
 
     public function testServicesWhereAddedToContainerWithParam(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
-        $di = new CliDependencyInjection([], [\Framework\Request\HttpRequest::class => ['', '', [], [], '']]);
+        $di = new CliDependencyInjection([], [\Therion86\Framework\Request\HttpRequest::class => ['', '', [], [], '']]);
 
         $this->assertInstanceOf(
-            \Framework\Request\HttpRequest::class,
-            $di->getContainer()->load(\Framework\Request\HttpRequest::class)
+            \Therion86\Framework\Request\HttpRequest::class,
+            $di->getContainer()->load(\Therion86\Framework\Request\HttpRequest::class)
         );
     }
 

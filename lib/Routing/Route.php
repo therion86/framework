@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Routing;
+namespace Therion86\Framework\Routing;
 
 class Route
 {

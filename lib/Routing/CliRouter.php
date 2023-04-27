@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 
-namespace Framework\Routing;
+namespace Therion86\Framework\Routing;
 
 use Exception;
-use Framework\Cli\Argument;
-use Framework\DependencyInjection\CliDependencyInjection;
-use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
-use Framework\Exceptions\HandlerNotFoundException;
-use Framework\Exceptions\RouteAlreadyExistsException;
-use Framework\Exceptions\RouteNotFoundException;
-use Framework\Interfaces\CliHandlerInterface;
+use Therion86\Framework\Cli\Argument;
+use Therion86\Framework\DependencyInjection\CliDependencyInjection;
+use Therion86\Framework\Exceptions\HandlerInterfaceNotFullfilledException;
+use Therion86\Framework\Exceptions\HandlerNotFoundException;
+use Therion86\Framework\Exceptions\RouteAlreadyExistsException;
+use Therion86\Framework\Exceptions\RouteNotFoundException;
+use Therion86\Framework\Interfaces\CliHandlerInterface;
 
 class CliRouter
 {

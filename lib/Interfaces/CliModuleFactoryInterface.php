@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Interfaces;
+namespace Therion86\Framework\Interfaces;
 
-use Framework\Routing\CliRouter;
+use Therion86\Framework\Routing\CliRouter;
 
 /**
  * @codeCoverageIgnore

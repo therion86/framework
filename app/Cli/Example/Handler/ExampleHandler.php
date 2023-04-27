@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 
-namespace App\Cli\Example\Handler;
+namespace Therion86\App\Cli\Example\Handler;
 
-use Framework\Cli\Argument;
-use Framework\Cli\CliFunctions;
-use Framework\Interfaces\CliHandlerInterface;
+use Therion86\Framework\Cli\Argument;
+use Therion86\Framework\Cli\CliFunctions;
+use Therion86\Framework\Interfaces\CliHandlerInterface;
 
 class ExampleHandler implements CliHandlerInterface
 {

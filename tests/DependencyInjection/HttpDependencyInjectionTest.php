@@ -3,20 +3,20 @@
 declare(strict_types=1);
 
 
-namespace Test\DependencyInjection;
+namespace Therion86\Test\DependencyInjection;
 
-use App\Http\Example\Factory;
-use App\Http\Example\Handler\ExampleHandler;
+use Therion86\App\Http\Example\Factory;
+use Therion86\App\Http\Example\Handler\ExampleHandler;
 use Exception;
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Interfaces\HttpRequestInterface;
-use Framework\Interfaces\ResponseInterface;
-use Framework\Request\HttpRequest;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Interfaces\HttpRequestInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 /**
- * @covers \Framework\DependencyInjection\HttpDependencyInjection
+ * @covers \Therion86\Framework\DependencyInjection\HttpDependencyInjection
  */
 class HttpDependencyInjectionTest extends TestCase
 {
@@ -50,7 +50,7 @@ class HttpDependencyInjectionTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Provided module factory must implement ModuleFactoryInterface');
-        $di = new HttpDependencyInjection([\App\Cli\Example\Factory::class], []);
+        $di = new HttpDependencyInjection([\Therion86\App\Cli\Example\Factory::class], []);
     }
 
     public function testCallableServicesWhereAddedToContainer(): void

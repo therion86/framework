@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Enums;
+namespace Therion86\Framework\Enums;
 
 /**
  * @codeCoverageIgnore

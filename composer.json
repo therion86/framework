@@ -1,13 +1,13 @@
 {
   "autoload": {
     "psr-4": {
-      "Framework\\": "lib",
-      "App\\": "app"
+      "Therion86\\Framework\\": "lib",
+      "Therion86\\App\\": "app"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Test\\": "tests"
+      "Therion86\\Test\\": "tests"
     }
   },
   "name": "therion/framework",

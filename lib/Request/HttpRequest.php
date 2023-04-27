@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Request;
+namespace Therion86\Framework\Request;
 
-use Framework\Interfaces\HttpRequestInterface;
+use Therion86\Framework\Interfaces\HttpRequestInterface;
 
 use function getallheaders;
 

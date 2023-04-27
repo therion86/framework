@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 
-namespace App\Cli\Example;
+namespace Therion86\App\Cli\Example;
 
-use App\Cli\Example\Handler\ExampleHandler;
-use Framework\DependencyInjection\DependencyInjection;
-use Framework\Interfaces\CliModuleFactoryInterface;
-use Framework\Routing\CliRouter;
+use Therion86\App\Cli\Example\Handler\ExampleHandler;
+use Therion86\Framework\DependencyInjection\DependencyInjection;
+use Therion86\Framework\Interfaces\CliModuleFactoryInterface;
+use Therion86\Framework\Routing\CliRouter;
 
 class Factory implements CliModuleFactoryInterface
 {

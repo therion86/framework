@@ -2,9 +2,9 @@
 declare(strict_types=1);
 require_once 'vendor/autoload.php';
 
-use Framework\Application;
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Enums\AppType;
+use Therion86\Framework\Application;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Enums\AppType;
 
 
 if (! file_exists(__DIR__ . '/config/modules.php')) {

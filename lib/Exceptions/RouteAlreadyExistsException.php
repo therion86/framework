@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Exceptions;
+namespace Therion86\Framework\Exceptions;
 
 use Exception;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Example;
+namespace Therion86\App\Http\Example;
 
-use App\Http\Example\Handler\ExampleHandler;
-use Framework\DependencyInjection\DependencyInjection;
-use Framework\Interfaces\ModuleFactoryInterface;
-use Framework\Interfaces\RequestInterface;
-use Framework\Interfaces\ResponseInterface;
-use Framework\Request\HttpRequest;
-use Framework\Routing\HttpRouter;
+use Therion86\App\Http\Example\Handler\ExampleHandler;
+use Therion86\Framework\DependencyInjection\DependencyInjection;
+use Therion86\Framework\Interfaces\ModuleFactoryInterface;
+use Therion86\Framework\Interfaces\RequestInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\Request\HttpRequest;
+use Therion86\Framework\Routing\HttpRouter;
 
 class Factory implements ModuleFactoryInterface
 {

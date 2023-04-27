@@ -1,12 +1,12 @@
 <?php
 
-namespace Framework\DependencyInjection;
+namespace Therion86\Framework\DependencyInjection;
 
 
-use Framework\Cli\Argument;
-use Framework\Cli\CliFunctions;
-use Framework\Interfaces\CliModuleFactoryInterface;
-use Framework\Routing\CliRouter;
+use Therion86\Framework\Cli\Argument;
+use Therion86\Framework\Cli\CliFunctions;
+use Therion86\Framework\Interfaces\CliModuleFactoryInterface;
+use Therion86\Framework\Routing\CliRouter;
 
 class CliDependencyInjection extends DependencyInjection
 {

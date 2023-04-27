@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Exceptions;
+namespace Therion86\Framework\Exceptions;
 
 use Exception;
 

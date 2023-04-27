@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Example\Handler;
+namespace Therion86\App\Http\Example\Handler;
 
-use Framework\Interfaces\HandlerInterface;
-use Framework\Interfaces\HttpRequestInterface;
-use Framework\Interfaces\RequestInterface;
-use Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\Interfaces\HandlerInterface;
+use Therion86\Framework\Interfaces\HttpRequestInterface;
+use Therion86\Framework\Interfaces\RequestInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
 
 class ExampleHandler implements HandlerInterface
 {

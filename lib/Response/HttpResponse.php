@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Response;
+namespace Therion86\Framework\Response;
 
-use Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
 
 class HttpResponse implements ResponseInterface
 {

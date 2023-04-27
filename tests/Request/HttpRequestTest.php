@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace Test\Request;
+namespace Therion86\Test\Request;
 
-use Framework\Request\HttpRequest;
+use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 /**

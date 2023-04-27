@@ -1,8 +1,8 @@
 <?php
 
-namespace Framework\Interfaces;
+namespace Therion86\Framework\Interfaces;
 
-use Framework\Routing\HttpRouter;
+use Therion86\Framework\Routing\HttpRouter;
 
 /**
  * @codeCoverageIgnore

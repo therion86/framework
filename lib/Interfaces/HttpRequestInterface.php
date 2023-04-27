@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Interfaces;
+namespace Therion86\Framework\Interfaces;
 
 /**
  * @codeCoverageIgnore

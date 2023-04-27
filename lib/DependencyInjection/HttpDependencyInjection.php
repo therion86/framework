@@ -1,16 +1,14 @@
 <?php
 
-namespace Framework\DependencyInjection;
+namespace Therion86\Framework\DependencyInjection;
 
 use Exception;
-use Framework\Exceptions\ClassNotRegisteredException;
-use Framework\Interfaces\HttpRequestInterface;
-use Framework\Interfaces\ModuleFactoryInterface;
-use Framework\Interfaces\RequestInterface;
-use Framework\Interfaces\ResponseInterface;
-use Framework\Request\HttpRequest;
-use Framework\Response\HttpResponse;
-use Framework\Routing\HttpRouter;
+use Therion86\Framework\Interfaces\HttpRequestInterface;
+use Therion86\Framework\Interfaces\ModuleFactoryInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\Request\HttpRequest;
+use Therion86\Framework\Response\HttpResponse;
+use Therion86\Framework\Routing\HttpRouter;
 use Throwable;
 
 class HttpDependencyInjection extends DependencyInjection
