@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace Test\Response;
+namespace Therion86\Test\Response;
 
-use Framework\Response\HttpResponse;
+use Therion86\Framework\Response\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
 class HttpResponseTest extends TestCase

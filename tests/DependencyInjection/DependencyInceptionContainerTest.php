@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 
-namespace Test\DependencyInjection;
+namespace Therion86\Test\DependencyInjection;
 
-use Framework\DependencyInjection\DependencyInjectionContainer;
-use Framework\Exceptions\ClassNotRegisteredException;
-use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
-use Framework\Request\HttpRequest;
+use Therion86\Framework\DependencyInjection\DependencyInjectionContainer;
+use Therion86\Framework\Exceptions\ClassNotRegisteredException;
+use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
+use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 /**

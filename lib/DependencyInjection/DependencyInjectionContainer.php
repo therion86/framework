@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Framework\DependencyInjection;
+namespace Therion86\Framework\DependencyInjection;
 
-use Framework\Exceptions\ClassNotRegisteredException;
-use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
+use Therion86\Framework\Exceptions\ClassNotRegisteredException;
+use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use ReflectionClass;
 use ReflectionException;
 

@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 
-namespace Test\Routing;
+namespace Therion86\Test\Routing;
 
-use App\Http\Example\Factory;
-use App\Http\Example\Handler\ExampleHandler;
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
-use Framework\Exceptions\HandlerNotFoundException;
-use Framework\Exceptions\RouteAlreadyExistsException;
-use Framework\Exceptions\RouteNotFoundException;
+use Therion86\App\Http\Example\Factory;
+use Therion86\App\Http\Example\Handler\ExampleHandler;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Exceptions\HandlerInterfaceNotFullfilledException;
+use Therion86\Framework\Exceptions\HandlerNotFoundException;
+use Therion86\Framework\Exceptions\RouteAlreadyExistsException;
+use Therion86\Framework\Exceptions\RouteNotFoundException;
 use PHPUnit\Framework\TestCase;
 
 /**

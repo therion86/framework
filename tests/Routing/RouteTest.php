@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace Test\Routing;
+namespace Therion86\Test\Routing;
 
-use Framework\Routing\Route;
+use Therion86\Framework\Routing\Route;
 use PHPUnit\Framework\TestCase;
 
 /**

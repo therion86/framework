@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Test;
+namespace Therion86\Test;
 
-use App\Cli\Example\Factory;
-use Framework\Application;
-use Framework\DependencyInjection\CliDependencyInjection;
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Enums\AppType;
+use Therion86\App\Cli\Example\Factory;
+use Therion86\Framework\Application;
+use Therion86\Framework\DependencyInjection\CliDependencyInjection;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Enums\AppType;
 use PHPUnit\Framework\TestCase;
 
 /**

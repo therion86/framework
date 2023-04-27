@@ -1,12 +1,12 @@
 <?php
 
-namespace Framework;
+namespace Therion86\Framework;
 
 use Exception;
-use Framework\DependencyInjection\CliDependencyInjection;
-use Framework\DependencyInjection\DependencyInjection;
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Enums\AppType;
+use Therion86\Framework\DependencyInjection\CliDependencyInjection;
+use Therion86\Framework\DependencyInjection\DependencyInjection;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Enums\AppType;
 
 class Application
 {

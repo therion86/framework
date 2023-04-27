@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Framework\Cli;
+namespace Therion86\Framework\Cli;
 
 class Argument
 {

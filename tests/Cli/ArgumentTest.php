@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace Test\Cli;
+namespace Therion86\Test\Cli;
 
-use Framework\Cli\Argument;
+use Therion86\Framework\Cli\Argument;
 use PHPUnit\Framework\TestCase;
 
 /**

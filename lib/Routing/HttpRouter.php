@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Framework\Routing;
+namespace Therion86\Framework\Routing;
 
-use Framework\DependencyInjection\HttpDependencyInjection;
-use Framework\Exceptions\ClassNotRegisteredException;
-use Framework\Exceptions\ConstructorParameterTypeNotFoundException;
-use Framework\Exceptions\HandlerInterfaceNotFullfilledException;
-use Framework\Exceptions\HandlerNotFoundException;
-use Framework\Exceptions\RouteAlreadyExistsException;
-use Framework\Exceptions\RouteNotFoundException;
-use Framework\Interfaces\HandlerInterface;
-use Framework\Interfaces\ResponseInterface;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
+use Therion86\Framework\Exceptions\ClassNotRegisteredException;
+use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
+use Therion86\Framework\Exceptions\HandlerInterfaceNotFullfilledException;
+use Therion86\Framework\Exceptions\HandlerNotFoundException;
+use Therion86\Framework\Exceptions\RouteAlreadyExistsException;
+use Therion86\Framework\Exceptions\RouteNotFoundException;
+use Therion86\Framework\Interfaces\HandlerInterface;
+use Therion86\Framework\Interfaces\ResponseInterface;
 use ReflectionException;
 
 class HttpRouter

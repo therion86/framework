@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\DependencyInjection;
+namespace Therion86\Framework\DependencyInjection;
 
 abstract class DependencyInjection
 {

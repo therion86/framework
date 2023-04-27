@@ -1,0 +1,4 @@
+<?php
+return [
+    Therion86\App\Cli\Example\Factory::class
+];

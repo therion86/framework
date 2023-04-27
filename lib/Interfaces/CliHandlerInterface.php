@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 
-namespace Framework\Interfaces;
+namespace Therion86\Framework\Interfaces;
 
-use Framework\Cli\Argument;
+use Therion86\Framework\Cli\Argument;
 
 /**
  * @codeCoverageIgnore
