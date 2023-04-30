@@ -54,7 +54,7 @@ class HttpRequest implements HttpRequestInterface
         return $this->uri;
     }
 
-    public function getParameter(string $parameterName): ?string
+    public function getParameter(string $parameterName): string|array|null
     {
         return $this->params[$parameterName] ?? null;
     }

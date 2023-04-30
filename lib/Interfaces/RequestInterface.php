@@ -9,7 +9,7 @@ interface RequestInterface
 {
     public static function fromGlobals(): self;
 
-    public function getParameter(string $parameterName): ?string;
+    public function getParameter(string $parameterName): string|array|null;
 
     public function getParameters(): array;
 
