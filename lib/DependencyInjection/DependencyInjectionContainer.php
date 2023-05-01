@@ -30,6 +30,9 @@ class DependencyInjectionContainer
     }
 
     /**
+     * @template T
+     * @param class-string<T> $className
+     * @return T|null
      * @throws ReflectionException
      * @throws ClassNotRegisteredException
      * @throws ConstructorParameterTypeNotFoundException
