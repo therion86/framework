@@ -27,7 +27,6 @@ class CliRouter
 
     public function route(): void
     {
-
         if (false === $this->methodParams->getMethod()) {
             throw new Exception('Mandatory function name was not set');
         }
