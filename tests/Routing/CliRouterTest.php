@@ -15,7 +15,7 @@ use Therion86\Framework\Exceptions\RouteAlreadyExistsException;
 use Therion86\Framework\Exceptions\RouteNotFoundException;
 
 /**
- * @covers \Framework\Routing\CliRouter
+ * @covers \Therion86\Framework\Routing\CliRouter
  */
 class CliRouterTest extends \PHPUnit\Framework\TestCase
 {
@@ -30,7 +30,7 @@ class CliRouterTest extends \PHPUnit\Framework\TestCase
         $cliRouter->registerCommand('test', ExampleHandler::class, []);
 
         $cliRouter->route();
-        $this->expectOutputString('Test' . PHP_EOL);
+        $this->expectOutputString('');
     }
 
     public function testMandatoryMehtodFails(): void

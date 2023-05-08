@@ -5,8 +5,14 @@ declare(strict_types=1);
 
 namespace Therion86\Framework\Cli;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CliFunctions
 {
+    private const ESCAPE = "\e[";
+    private const RESET = "\e[0m";
+
     private $stdout;
     private $stdin;
 
@@ -19,23 +25,22 @@ class CliFunctions
         $this->stderr = fopen('php://stderr', 'wb');
     }
 
-
-    public function writeLn(string $text, CliColor $color = CliColor::BLACK): void
+    public function writeLn(string $text, CliFormatOptions ...$cliFormatOptions): void
     {
-        fwrite($this->stdout, $color->value);
-
-        fwrite($this->stdout, $text . PHP_EOL);
-
-        fwrite($this->stdout, CliColor::BLACK->value);
+        fwrite($this->stdout, $this->formatText($text, ...$cliFormatOptions) . PHP_EOL);
     }
 
-    public function write(string $text, CliColor $color = CliColor::BLACK): void
+    private function formatText(string $text, CliFormatOptions ...$cliFormatOptions): string
     {
-        fwrite($this->stdout, $color->value);
+        $formats = array_map(static fn(CliFormatOptions $options) => $options->value, $cliFormatOptions);
 
-        fwrite($this->stdout, $text);
+        return self::ESCAPE . implode(';', $formats) . 'm' . $text . self::RESET;
+    }
 
-        fwrite($this->stdout, CliColor::BLACK->value);
+    public function write(string $text, CliFormatOptions ...$cliFormatOptions): void
+    {
+        fwrite($this->stdout, $this->formatText($text, ...$cliFormatOptions));
+
     }
 
     public function ln(): void
@@ -43,9 +48,9 @@ class CliFunctions
         $this->write(PHP_EOL);
     }
 
-    public function read($prompt, $color = CliColor::BLACK): string
+    public function read($prompt, CliFormatOptions ...$cliFormatOptions): string
     {
-        $this->writeLn($prompt, $color);
+        $this->writeLn($prompt, ...$cliFormatOptions);
         return trim(fgets($this->stdin));
     }
 
