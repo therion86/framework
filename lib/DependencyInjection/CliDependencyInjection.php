@@ -15,7 +15,6 @@ class CliDependencyInjection extends DependencyInjection
     public function __construct(array $loadedModules, array $loadedServices)
     {
         parent::__construct();
-
         $this->router = new CliRouter($this, new Argument($_SERVER['argv']));
         foreach ($loadedModules as $loadedModule) {
             $moduleFactory = new $loadedModule($this);

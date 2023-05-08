@@ -4,7 +4,6 @@ namespace Therion86\App\Http\Example\Handler;
 
 use Therion86\Framework\Interfaces\HandlerInterface;
 use Therion86\Framework\Interfaces\HttpRequestInterface;
-use Therion86\Framework\Interfaces\RequestInterface;
 use Therion86\Framework\Interfaces\ResponseInterface;
 
 class ExampleHandler implements HandlerInterface
