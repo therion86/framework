@@ -20,7 +20,7 @@ class DependencyInjectionContainer
     {
         $this->container[$classLabel] = $className ?? $classLabel;
         if (!empty($parameters)) {
-            $this->parameters[$className] = $parameters;
+            $this->parameters[$classLabel] = $parameters;
         }
     }
 
@@ -42,9 +42,8 @@ class DependencyInjectionContainer
         if (!isset($this->container[$className])) {
             throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
         }
-
         if (isset($this->parameters[$className])) {
-            return (new ReflectionClass($className))->newInstanceArgs($this->parameters[$className]);
+            return $this->getObjectWithParameters($className);
         }
         return $this->getDependenciesByReflection($className);
     }
@@ -85,5 +84,56 @@ class DependencyInjectionContainer
             }
         }
         return $refClass->newInstanceArgs($dependencies);
+    }
+
+    /**
+     * @template T
+     * @param class-string<T> $className
+     * @return T|null
+     * @throws ReflectionException
+     */
+    private function getObjectWithParameters(string $className)
+    {
+        $parameters = $this->parameters[$className];
+        if ($this->numericParameters($parameters)) {
+            return (new ReflectionClass($className))->newInstanceArgs($this->parameters[$className]);
+        }
+        $ref = new ReflectionClass($className);
+        $constructor = $ref->getConstructor();
+        if (null === $constructor) {
+            throw new ReflectionException('Class has no defined constructor but has construction parameters defined!');
+        }
+        $constParams = $constructor->getParameters();
+
+        $sortedConstructionParams = [];
+        foreach ($constParams as $parameterOrder => $parameter) {
+            if (isset($parameters[$parameter->getName()])) {
+                $sortedConstructionParams[$parameterOrder] = $parameters[$parameter->getName()];
+            }
+            if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
+                $sortedConstructionParams[$parameterOrder] = $parameter->getDefaultValue();
+            }
+
+            if ($parameter->allowsNull()) {
+                $sortedConstructionParams[$parameterOrder] = null;
+            }
+        }
+        if (count($sortedConstructionParams) !== count($parameters)) {
+            throw new ReflectionException('Parameters are not equal to the parameters wanted in constructor, maybe naming?');
+        }
+        return $ref->newInstanceArgs($sortedConstructionParams);
+    }
+
+    /**
+     * @param string[] $array
+     * @return bool
+     */
+    private function numericParameters(array $array): bool
+    {
+        if (!is_array($array)) {
+            return false;
+        }
+
+        return array_values($array) === $array;
     }
 }
