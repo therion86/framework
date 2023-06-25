@@ -110,6 +110,13 @@ class DependencyInjectionContainer
             if (isset($parameters[$parameter->getName()])) {
                 $sortedConstructionParams[$parameterOrder] = $parameters[$parameter->getName()];
             }
+            if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
+                $sortedConstructionParams[$parameterOrder] = $parameter->getDefaultValue();
+            }
+
+            if ($parameter->allowsNull()) {
+                $sortedConstructionParams[$parameterOrder] = null;
+            }
         }
         if (count($sortedConstructionParams) !== count($parameters)) {
             throw new ReflectionException('Parameters are not equal to the parameters wanted in constructor, maybe naming?');

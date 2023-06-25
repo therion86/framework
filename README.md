@@ -86,7 +86,7 @@ You can just register them by using the ```registerCallable(string $className, c
 
 You can load the entry by using the ```loadCallable(string $className)``` from the container. Note the method executes the callable method.
 
-### 11. Register classes with static parameters
+### 11. Register classes with static parameters 
 You can register classes with static parameters for example defaultUserId or something else.
 
 For this you have to hand over paramers in the register function of the DI-Container:
@@ -99,7 +99,7 @@ You can also name your parameter:
 ``` 
     $di->getContainer()->register(YourClass:class, null, ['paramName2' => 'value2', 'paramName1' => 'value2']
 ```
-The DI matches the params to their right position 
+The DI matches the params to their right position.
 
 ### 12. Register your own request or response class
 You can Register your own request or response class by adding them to the di. There are two ways to add them: 
