@@ -13,6 +13,7 @@ use stdClass;
 
 /**
  * @covers \Therion86\Framework\DependencyInjection\CliDependencyInjection
+ * @covers \Therion86\Framework\DependencyInjection\DependencyInjection
  */
 class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
 {

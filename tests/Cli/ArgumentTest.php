@@ -9,7 +9,7 @@ use Therion86\Framework\Cli\Argument;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\Cli\Argument
+ * @covers \Therion86\Framework\Cli\Argument
  */
 class ArgumentTest extends TestCase
 {
@@ -45,5 +45,11 @@ class ArgumentTest extends TestCase
 
         $this->assertNull($argument->getArgValue('name'));
 
+    }
+
+    public function testArgumentIsEqualTheWantedArgument()
+    {
+        $argument = new Argument(['index.php', 'example', '--runner']);
+        $this->assertFalse($argument->hasArg('run'));
     }
 }

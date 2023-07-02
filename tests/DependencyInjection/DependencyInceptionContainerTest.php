@@ -12,7 +12,7 @@ use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\DependencyInjection\DependencyInjectionContainer
+ * @covers \Therion86\Framework\DependencyInjection\DependencyInjectionContainer
  */
 class DependencyInceptionContainerTest extends TestCase
 {
@@ -86,6 +86,34 @@ class DependencyInceptionContainerTest extends TestCase
 
         $this->assertInstanceOf(TestCaseSubClass::class, $dic->load(TestCaseSubClass::class));
     }
+
+    public function testRegisterClassWithArguments(): void
+    {
+        $dic = new DependencyInjectionContainer();
+        $dic->register(TestCaseType::class, null, ['value' => 'string']);
+
+        $this->assertInstanceOf(TestCaseType::class, $dic->load(TestCaseType::class));
+    }
+
+    public function testNoConstructor(): void
+    {
+        $dic = new DependencyInjectionContainer();
+        $dic->register(TestCaseNoConstructor::class, null, ['value' => 'string']);
+
+        $this->expectException(\ReflectionException::class);
+        $this->expectExceptionMessage('Class has no defined constructor but has construction parameters defined!');
+        $dic->load(TestCaseNoConstructor::class);
+    }
+
+    public function testParametersNotEqual(): void
+    {
+        $dic = new DependencyInjectionContainer();
+        $dic->register(TestCaseType::class, null, ['value' => 'string', 'test' => 'test']);
+
+        $this->expectException(\ReflectionException::class);
+        $this->expectExceptionMessage('Parameters are not equal to the parameters wanted in constructor, maybe naming?');
+        $dic->load(TestCaseType::class);
+    }
 }
 
 class TestCaseNoType {
@@ -104,4 +132,8 @@ class TestCaseSubClass {
     public function __construct(TestCaseType $type)
     {
     }
+}
+
+class TestCaseNoConstructor {
+
 }

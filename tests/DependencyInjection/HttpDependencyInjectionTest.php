@@ -17,6 +17,7 @@ use stdClass;
 
 /**
  * @covers \Therion86\Framework\DependencyInjection\HttpDependencyInjection
+ * @covers \Therion86\Framework\DependencyInjection\DependencyInjection
  */
 class HttpDependencyInjectionTest extends TestCase
 {

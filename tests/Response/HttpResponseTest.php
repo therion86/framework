@@ -8,6 +8,9 @@ namespace Therion86\Test\Response;
 use Therion86\Framework\Response\HttpResponse;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Therion86\Framework\Response\HttpResponse
+ */
 class HttpResponseTest extends TestCase
 {
 

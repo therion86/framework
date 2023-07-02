@@ -46,7 +46,7 @@ You also can load your Modules with static construction Parameters.
 In your ModuleFactory you can add handler or other classes by adding them onto the DI-Container: ``$this->di->getContainer()->register(ExampleHandler::class)``
 
 
-If you only fill the first parameter of the register function then in code you have to call the load function with this name. 
+If you only fill the first parameter of the register function then in code you have to call the load function with this name. (This means the second param is nullable) 
 
 
 You can decorate the classname. You have to call the register function with a second parameter. The first Parameter now is the Label and the second is the exactly className. For example: ```->register(SomeInterface::class, YourClass::class)```. You can load now YourClass by loading thie interface: ```->load(SomeInterface::class)``` 
@@ -88,16 +88,17 @@ You can load the entry by using the ```loadCallable(string $className)``` from t
 ### 11. Register classes with static parameters 
 You can register classes with static parameters for example defaultUserId or something else.
 
-For this you have to hand over paramers in the register function of the DI-Container:
+For this you have to hand over parameters in the register function of the DI-Container:
 ``` 
     $di->getContainer()->register(YourClass:class, null, ['value1', 'value2']
 ```
 
-You can also name your parameter:
+You can also name your parameter: **_(Not recomendet, but possible for complex classes...PERFORMANCE!)_**
 
 ``` 
     $di->getContainer()->register(YourClass:class, null, ['paramName2' => 'value2', 'paramName1' => 'value2']
 ```
+
 The DI matches the params to their right position.
 
 ### 12. Register your own request or response class

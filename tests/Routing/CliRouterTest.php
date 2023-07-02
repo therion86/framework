@@ -20,6 +20,9 @@ use Therion86\Framework\Exceptions\RouteNotFoundException;
 class CliRouterTest extends \PHPUnit\Framework\TestCase
 {
 
+    /**
+     * @covers \Therion86\Framework\Interfaces\CliHandlerInterface
+     */
     public function testCliRouter(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];

@@ -100,6 +100,7 @@ class DependencyInjectionContainer
         }
         $ref = new ReflectionClass($className);
         $constructor = $ref->getConstructor();
+
         if (null === $constructor) {
             throw new ReflectionException('Class has no defined constructor but has construction parameters defined!');
         }
@@ -130,10 +131,6 @@ class DependencyInjectionContainer
      */
     private function numericParameters(array $array): bool
     {
-        if (!is_array($array)) {
-            return false;
-        }
-
         return array_values($array) === $array;
     }
 }
