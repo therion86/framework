@@ -12,7 +12,7 @@ use Therion86\Framework\Enums\AppType;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\Application
+ * @covers \Therion86\Framework\Application
  */
 class ApplicationTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ApplicationTest extends TestCase
             AppType::CLI,
             [Factory::class],
             [
-                \Framework\Request\HttpRequest::class => fn() => 'return',
+                \Therion86\Framework\Request\HttpRequest::class => fn() => 'return',
                 \PHPUnit\Framework\Test::class => []
             ]
         );

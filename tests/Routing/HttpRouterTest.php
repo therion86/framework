@@ -15,7 +15,7 @@ use Therion86\Framework\Exceptions\RouteNotFoundException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\Routing\HttpRouter
+ * @covers \Therion86\Framework\Routing\HttpRouter
  */
 class HttpRouterTest extends TestCase
 {

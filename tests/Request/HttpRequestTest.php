@@ -9,7 +9,7 @@ use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\Request\HttpRequest
+ * @covers \Therion86\Framework\Request\HttpRequest
  */
 class HttpRequestTest extends TestCase
 {

@@ -9,7 +9,7 @@ use Therion86\Framework\Routing\Route;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Framework\Routing\Route
+ * @covers \Therion86\Framework\Routing\Route
  */
 class RouteTest extends TestCase
 {

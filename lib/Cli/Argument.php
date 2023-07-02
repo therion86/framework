@@ -28,7 +28,7 @@ class Argument
             $argument = '--' . $argument;
         }
         foreach ($this->args as $arg) {
-            if (str_contains($arg, $argument)) {
+            if ($arg === $argument || explode('=', $arg)[0] === $argument) {
                 return true;
             }
         }
