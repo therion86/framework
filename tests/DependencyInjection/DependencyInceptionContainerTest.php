@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Therion86\Test\DependencyInjection;
 
 use Therion86\Framework\DependencyInjection\DependencyInjectionContainer;
+use Therion86\Framework\DependencyInjection\HttpDependencyInjection;
 use Therion86\Framework\Exceptions\ClassNotRegisteredException;
 use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use Therion86\Framework\Request\HttpRequest;
@@ -19,7 +20,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testRegister(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(\stdClass::class);
 
         $this->assertInstanceOf(\stdClass::class, $dic->load(\stdClass::class));
@@ -27,7 +29,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testRegisterWithParams(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(HttpRequest::class, HttpRequest::class, ['', '', [],[],'']);
 
         $this->assertInstanceOf(HttpRequest::class, $dic->load(HttpRequest::class));
@@ -36,7 +39,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testRegisterCallable(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->registerCallable(\stdClass::class, fn() => new \stdClass());
 
         $this->assertInstanceOf(\stdClass::class, $dic->loadCallable(\stdClass::class));
@@ -45,7 +49,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testLoadClassNotRegistered(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
 
         $this->expectException(ClassNotRegisteredException::class);
         $dic->load(\stdClass::class);
@@ -53,7 +58,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testLoadCallableClassNotRegistered(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
 
         $this->expectException(ClassNotRegisteredException::class);
         $dic->loadCallable(\stdClass::class);
@@ -61,7 +67,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testConstructorParameterTypeNotFoundException(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseNoType::class);
 
         $this->expectException(ConstructorParameterTypeNotFoundException::class);
@@ -70,7 +77,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testGetDependenciesByReflectionWithType(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseType::class);
 
         $this->assertInstanceOf(TestCaseType::class, $dic->load(TestCaseType::class));
@@ -78,7 +86,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testGetDependenciesByReflectionWithSubclass(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseType::class);
 
         $dic->register(TestCaseSubClass::class);
@@ -89,7 +98,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testRegisterClassWithArguments(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseType::class, null, ['value' => 'string']);
 
         $this->assertInstanceOf(TestCaseType::class, $dic->load(TestCaseType::class));
@@ -97,7 +107,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testNoConstructor(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseNoConstructor::class, null, ['value' => 'string']);
 
         $this->expectException(\ReflectionException::class);
@@ -107,7 +118,8 @@ class DependencyInceptionContainerTest extends TestCase
 
     public function testParametersNotEqual(): void
     {
-        $dic = new DependencyInjectionContainer();
+        $di = new HttpDependencyInjection([], []);
+        $dic = new DependencyInjectionContainer($di);
         $dic->register(TestCaseType::class, null, ['value' => 'string', 'test' => 'test']);
 
         $this->expectException(\ReflectionException::class);
