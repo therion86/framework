@@ -16,7 +16,7 @@ use Throwable;
 
 class HttpDependencyInjection extends DependencyInjection
 {
-    private ?HttpRouter $router = null;
+    private ?HttpRouterInterface $router = null;
 
     /**
      *
@@ -47,11 +47,11 @@ class HttpDependencyInjection extends DependencyInjection
     /**
      * If no Router is registered in di the fallback is used
      *
-     * @return HttpRouter
+     * @return HttpRouterInterface
      * @throws ConstructorParameterTypeNotFoundException
      * @throws \ReflectionException
      */
-    public function getRouter(): HttpRouter
+    public function getRouter(): HttpRouterInterface
     {
         if (null !== $this->router) {
             return $this->router;

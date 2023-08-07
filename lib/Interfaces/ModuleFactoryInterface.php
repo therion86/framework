@@ -10,6 +10,6 @@ use Therion86\Framework\Routing\HttpRouter;
 interface ModuleFactoryInterface
 {
 
-    public function registerRoutes(HttpRouter $router): void;
+    public function registerRoutes(HttpRouterInterface $router): void;
 
 }
