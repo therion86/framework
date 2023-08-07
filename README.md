@@ -117,6 +117,9 @@ in a module factory:
     $this->di->getContainer()->registerCallable(ResponseInterface::class, fn() => new HttpResponse(''));
 ```
 
+### 13. Using middlewares
+The Framework supports using middlewares by replacing the default HttpRouter with your own router object. In this class you can add middlewares by routing.
+
 ## AppType:Cli
 The cli part is the same as the http part with some changes. You always have the "cli" in the name of your interfaces:
 ``CliHandlerInterface``, ``CliModuleFactoryInterface``
@@ -124,3 +127,4 @@ The cli part is the same as the http part with some changes. You always have the
 DI and other Classes are nearly the same. Only difference in handlers, you will not have a return in your execute method. And you don't have a Request but ``Arguments`` which is a wrapper class for your ``$argv``
 
 You can always use the CliFunctions in your CliHandlers, they are injected by default
+
