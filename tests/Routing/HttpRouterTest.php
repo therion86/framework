@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 use Therion86\Framework\Routing\RouteType;
 
 /**
- * @covers \Therion86\Framework\Routing\HttpHttpRouter
+ * @covers \Therion86\Framework\Routing\HttpRouter
  */
 class HttpRouterTest extends TestCase
 {

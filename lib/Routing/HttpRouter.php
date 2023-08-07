@@ -16,7 +16,7 @@ use Therion86\Framework\Interfaces\ResponseInterface;
 use ReflectionException;
 use Therion86\Framework\Interfaces\HttpRouterInterface;
 
-class HttpHttpRouter implements HttpRouterInterface
+class HttpRouter implements HttpRouterInterface
 {
     private string $requestUri;
     private string $requestPath;

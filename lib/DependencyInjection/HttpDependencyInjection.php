@@ -11,12 +11,12 @@ use Therion86\Framework\Interfaces\ResponseInterface;
 use Therion86\Framework\Interfaces\HttpRouterInterface;
 use Therion86\Framework\Request\HttpRequest;
 use Therion86\Framework\Response\HttpResponse;
-use Therion86\Framework\Routing\HttpHttpRouter;
+use Therion86\Framework\Routing\HttpRouter;
 use Throwable;
 
 class HttpDependencyInjection extends DependencyInjection
 {
-    private ?HttpHttpRouter $router = null;
+    private ?HttpRouter $router = null;
 
     /**
      *
@@ -47,11 +47,11 @@ class HttpDependencyInjection extends DependencyInjection
     /**
      * If no Router is registered in di the fallback is used
      *
-     * @return HttpHttpRouter
+     * @return HttpRouter
      * @throws ConstructorParameterTypeNotFoundException
      * @throws \ReflectionException
      */
-    public function getRouter(): HttpHttpRouter
+    public function getRouter(): HttpRouter
     {
         if (null !== $this->router) {
             return $this->router;
@@ -59,7 +59,7 @@ class HttpDependencyInjection extends DependencyInjection
         try {
             return $this->router = $this->getContainer()->load(HttpRouterInterface::class);
         } catch (ClassNotRegisteredException) {
-            return $this->router = new HttpHttpRouter($this);
+            return $this->router = new HttpRouter($this);
         }
     }
 
