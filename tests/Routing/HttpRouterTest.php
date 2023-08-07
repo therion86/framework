@@ -13,13 +13,14 @@ use Therion86\Framework\Exceptions\HandlerNotFoundException;
 use Therion86\Framework\Exceptions\RouteAlreadyExistsException;
 use Therion86\Framework\Exceptions\RouteNotFoundException;
 use PHPUnit\Framework\TestCase;
+use Therion86\Framework\Routing\RouteType;
 
 /**
- * @covers \Therion86\Framework\Routing\HttpRouter
+ * @covers \Therion86\Framework\Routing\HttpHttpRouter
  */
 class HttpRouterTest extends TestCase
 {
-    public function testRouter()
+    public function testRouter(): void
     {
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -33,7 +34,7 @@ class HttpRouterTest extends TestCase
         $this->assertEquals('Hello World!',$resp->getBody());
     }
 
-    public function testRouteNotFoundForMethod()
+    public function testRouteNotFoundForMethod(): void
     {
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -46,7 +47,7 @@ class HttpRouterTest extends TestCase
         $router->route();
     }
 
-    public function testRouteNotFound()
+    public function testRouteNotFound(): void
     {
         $_SERVER['REQUEST_URI'] = '/d';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -59,7 +60,7 @@ class HttpRouterTest extends TestCase
         $router->route();
     }
 
-    public function testHandlerNotFound()
+    public function testHandlerNotFound(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -73,7 +74,7 @@ class HttpRouterTest extends TestCase
         $router->route();
     }
 
-    public function testHandlerInterfaceNotFullfilled()
+    public function testHandlerInterfaceNotFullfilled(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -89,7 +90,7 @@ class HttpRouterTest extends TestCase
         $router->route();
     }
 
-    public function testRouteAlreadyRegistered()
+    public function testRouteAlreadyRegistered(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -104,7 +105,7 @@ class HttpRouterTest extends TestCase
         $router->registerGetRoute('/test', \stdClass::class, []);
     }
 
-    public function testPostRoute()
+    public function testPostRoute(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -119,7 +120,7 @@ class HttpRouterTest extends TestCase
         $this->assertEquals('Hello World!',$resp->getBody());
     }
 
-    public function testPutRoute()
+    public function testPutRoute(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -134,7 +135,7 @@ class HttpRouterTest extends TestCase
         $this->assertEquals('Hello World!',$resp->getBody());
     }
 
-    public function testDeleteRoute()
+    public function testDeleteRoute(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -149,7 +150,7 @@ class HttpRouterTest extends TestCase
         $this->assertEquals('Hello World!',$resp->getBody());
     }
 
-    public function testPatchRoute()
+    public function testPatchRoute(): void
     {
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
@@ -161,6 +162,7 @@ class HttpRouterTest extends TestCase
         $router->registerPatchRoute('/test', ExampleHandler::class, []);
         $resp = $router->route();
 
+        $this->assertEquals('/test', $router->getRoutes()[RouteType::PATCH->name]['/test']->uri);
         $this->assertEquals('Hello World!',$resp->getBody());
     }
 

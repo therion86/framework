@@ -35,7 +35,7 @@ class CliRouter
             throw new RouteNotFoundException('Method ' . $this->methodParams->getMethod() . ' not found');
         }
         $route = $this->routes[$this->methodParams->getMethod()];
-        $handler = $route->getHandler();
+        $handler = $route->handler;
         if (!class_exists($handler)) {
             throw new HandlerNotFoundException('Handler ' . $handler . ' not found on the filesystem!');
         }
@@ -45,7 +45,7 @@ class CliRouter
             throw new HandlerInterfaceNotFullfilledException('Handler must implement CliModuleFactoryInterface!');
         }
 
-        foreach ($route->getParameters() as $parameterName => $parameterDescription) {
+        foreach ($route->parameters as $parameterName => $parameterDescription) {
             if (! $this->methodParams->hasArg($parameterName)) {
                 throw new Exception('Parameter ' . $parameterName . ' is mandatory but not set!');
             }
@@ -60,18 +60,18 @@ class CliRouter
     /**
      * @throws RouteAlreadyExistsException
      */
-    public function registerCommand(string $commandName, string $handler, array $parameters)
+    public function registerCommand(string $commandName, string $handler, array $parameters): void
     {
-        $this->registerRoute(new Route($commandName, 'cli', $parameters, $handler));
+        $this->registerRoute(new Route($commandName, RouteType::CLI, $parameters, $handler));
     }
 
     private function registerRoute(Route $route): void
     {
-        if (isset($this->routes[$route->getUri()])) {
+        if (isset($this->routes[$route->uri])) {
             throw new RouteAlreadyExistsException(
-                sprintf('Route % for method %s already exists!', $route->getUri(), $route->getMethod())
+                sprintf('Route % for method %s already exists!', $route->uri, $route->method->name)
             );
         }
-        $this->routes[$route->getUri()] = $route;
+        $this->routes[$route->uri] = $route;
     }
 }
