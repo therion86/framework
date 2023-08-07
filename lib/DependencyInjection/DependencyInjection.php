@@ -9,7 +9,7 @@ abstract class DependencyInjection
 
     public function __construct()
     {
-        $this->container = new DependencyInjectionContainer();
+        $this->container = new DependencyInjectionContainer($this);
     }
 
 

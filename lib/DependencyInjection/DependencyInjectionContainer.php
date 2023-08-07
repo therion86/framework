@@ -12,6 +12,10 @@ use ReflectionException;
 class DependencyInjectionContainer
 {
 
+    public function __construct(private readonly DependencyInjection $dependencyInjection)
+    {
+    }
+
     private array $container = [];
     private array $parameters = [];
     private array $statics = [];
@@ -39,6 +43,9 @@ class DependencyInjectionContainer
      */
     public function load(string $className): ?object
     {
+        if (in_array($className, [DependencyInjection::class, HttpDependencyInjection::class, CliDependencyInjection::class])) {
+            return $this->dependencyInjection;
+        }
         if (!isset($this->container[$className])) {
             throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
         }
