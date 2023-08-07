@@ -2,7 +2,7 @@
 
 namespace Therion86\Framework\Interfaces;
 
-use Therion86\Framework\Routing\HttpRouter;
+use Therion86\Framework\Routing\HttpHttpRouter;
 
 /**
  * @codeCoverageIgnore
@@ -10,6 +10,6 @@ use Therion86\Framework\Routing\HttpRouter;
 interface ModuleFactoryInterface
 {
 
-    public function registerRoutes(HttpRouter $router): void;
+    public function registerRoutes(HttpHttpRouter $router): void;
 
 }

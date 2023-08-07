@@ -14,15 +14,10 @@ use Therion86\Framework\Exceptions\RouteNotFoundException;
 use Therion86\Framework\Interfaces\HandlerInterface;
 use Therion86\Framework\Interfaces\ResponseInterface;
 use ReflectionException;
+use Therion86\Framework\Interfaces\HttpRouterInterface;
 
-class HttpRouter
+class HttpHttpRouter implements HttpRouterInterface
 {
-    private const GET = 'GET';
-    private const POST = 'POST';
-    private const PUT = 'PUT';
-    private const DELETE = 'DELETE';
-    private const PATCH = 'PATCH';
-
     private string $requestUri;
     private string $requestPath;
     private string $basePath;
@@ -60,12 +55,12 @@ class HttpRouter
         $route = null;
         $routeParameters = [];
         foreach ($this->routes[$this->requestType] as $route) {
-            $parameterNames = array_keys($route->getParameters());
-            $parameterValues = array_values($route->getParameters());
+            $parameterNames = array_keys($route->parameters);
+            $parameterValues = array_values($route->parameters);
             $routeUri = preg_replace(
                 array_map(fn($name) => '#{(' . $name . ')}#', $parameterNames),
                 array_map(fn($name) => '(?<$1>' . $name . ')', $parameterValues),
-                $route->getUri()
+                $route->uri
             );
             if (!preg_match('#^' . str_replace('/', '\\/', $routeUri) . '$#', $this->requestPath, $routeParameters)) {
                 $route = null;
@@ -76,7 +71,7 @@ class HttpRouter
         if (null === $route) {
             throw new RouteNotFoundException('Route for uri ' . $this->requestUri . ' not found!');
         }
-        $handler = $route->getHandler();
+        $handler = $route->handler;
         if (!class_exists($handler)) {
             throw new HandlerNotFoundException('Handler ' . $handler . ' not found on the filesystem!');
         }
@@ -93,46 +88,54 @@ class HttpRouter
 
     private function registerRoute(Route $route): void
     {
-        if (isset($this->routes[$route->getMethod()][$route->getUri()])) {
+        if (isset($this->routes[$route->method->name][$route->uri])) {
             throw new RouteAlreadyExistsException(
-                sprintf('Route % for method %s already exists!', $route->getUri(), $route->getMethod())
+                sprintf('Route % for method %s already exists!', $route->uri, $route->method->name)
             );
         }
-        $this->routes[$route->getMethod()][$route->getUri()] = $route;
+        $this->routes[$route->method->name][$route->uri] = $route;
     }
 
     public function registerGetRoute(string $routeUri, string $handler, array $parameters): self
     {
-        $route = new Route($routeUri, self::GET, $parameters, $handler);
+        $route = new Route($routeUri, RouteType::GET, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
     }
 
     public function registerPostRoute(string $routeUri, string $handler, array $parameters): self
     {
-        $route = new Route($routeUri, self::POST, $parameters, $handler);
+        $route = new Route($routeUri, RouteType::POST, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
     }
 
     public function registerPutRoute(string $routeUri, string $handler, array $parameters): self
     {
-        $route = new Route($routeUri, self::PUT, $parameters, $handler);
+        $route = new Route($routeUri, RouteType::PUT, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
     }
 
     public function registerPatchRoute(string $routeUri, string $handler, array $parameters): self
     {
-        $route = new Route($routeUri, self::PATCH, $parameters, $handler);
+        $route = new Route($routeUri, RouteType::PATCH, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
     }
 
     public function registerDeleteRoute(string $routeUri, string $handler, array $parameters): self
     {
-        $route = new Route($routeUri, self::DELETE, $parameters, $handler);
+        $route = new Route($routeUri, RouteType::DELETE, $parameters, $handler);
         $this->registerRoute($route);
         return $this;
+    }
+
+    /**
+     * @return array<array<Route>>
+     */
+    public function getRoutes(): array
+    {
+        return $this->routes;
     }
 }

@@ -5,7 +5,7 @@ namespace Therion86\App\Http\Example;
 use Therion86\App\Http\Example\Handler\ExampleHandler;
 use Therion86\Framework\DependencyInjection\DependencyInjection;
 use Therion86\Framework\Interfaces\ModuleFactoryInterface;
-use Therion86\Framework\Routing\HttpRouter;
+use Therion86\Framework\Routing\HttpHttpRouter;
 
 class Factory implements ModuleFactoryInterface
 {
@@ -15,7 +15,7 @@ class Factory implements ModuleFactoryInterface
 
     }
 
-    public function registerRoutes(HttpRouter $router): void
+    public function registerRoutes(HttpHttpRouter $router): void
     {
         $router->registerGetRoute(
             '/{id}',

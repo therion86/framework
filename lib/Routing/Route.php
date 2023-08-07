@@ -4,33 +4,13 @@ declare(strict_types=1);
 
 namespace Therion86\Framework\Routing;
 
-class Route
+readonly class Route
 {
     public function __construct(
-        private string $uri,
-        private string $method,
-        private array $parameters,
-        private string $handler
+        public string $uri,
+        public RouteType $method,
+        public array $parameters,
+        public string $handler
     ) {
-    }
-
-    public function getUri(): string
-    {
-        return $this->uri;
-    }
-
-    public function getMethod(): string
-    {
-        return $this->method;
-    }
-
-    public function getParameters(): array
-    {
-        return $this->parameters;
-    }
-
-    public function getHandler(): string
-    {
-        return $this->handler;
     }
 }
