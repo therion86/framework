@@ -19,4 +19,44 @@ interface HttpRouterInterface
      * @return array<array<Route>>
      */
     public function getRoutes(): array;
+
+    /**
+     * @param string $routeUri
+     * @param string $handler
+     * @param array $parameters
+     * @return self
+     */
+    public function registerGetRoute(string $routeUri, string $handler, array $parameters): self;
+
+    /**
+     * @param string $routeUri
+     * @param string $handler
+     * @param array $parameters
+     * @return self
+     */
+    public function registerPostRoute(string $routeUri, string $handler, array $parameters): self;
+
+    /**
+     * @param string $routeUri
+     * @param string $handler
+     * @param array $parameters
+     * @return self
+     */
+    public function registerPutRoute(string $routeUri, string $handler, array $parameters): self;
+
+    /**
+     * @param string $routeUri
+     * @param string $handler
+     * @param array $parameters
+     * @return self
+     */
+    public function registerPatchRoute(string $routeUri, string $handler, array $parameters): self;
+
+    /**
+     * @param string $routeUri
+     * @param string $handler
+     * @param array $parameters
+     * @return self
+     */
+    public function registerDeleteRoute(string $routeUri, string $handler, array $parameters): self;
 }
