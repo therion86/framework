@@ -10,12 +10,13 @@ class HttpRequest implements HttpRequestInterface
 {
     private array $routeParameters = [];
 
-    public function __construct(
-        private string $method,
-        private string $uri,
-        private array $headers = [],
-        private array $params = [],
-        private string $body = ''
+    private function __construct(
+        private readonly string $method,
+        private readonly string $uri,
+        private readonly array $headers = [],
+        private readonly array $params = [],
+        private readonly string $body = '',
+        private readonly string $host = ''
     ) {
     }
 
@@ -23,6 +24,7 @@ class HttpRequest implements HttpRequestInterface
     {
         $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'get');
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
+        $host =  $_SERVER['HTTP_HOST'];
         $headers = null;
 
         if (function_exists('\getallheaders')) {
@@ -36,7 +38,7 @@ class HttpRequest implements HttpRequestInterface
         }
         $params = array_merge($_GET, $_POST);
         $body = file_get_contents('php://input');
-        return new self($method, $uri, $headers, $params, $body);
+        return new self($method, $uri, $headers, $params, $body, $host);
     }
 
     public function getMethod(): string
@@ -78,5 +80,10 @@ class HttpRequest implements HttpRequestInterface
     {
         $this->routeParameters = $routeParameters;
         return $this;
+    }
+
+    public function getHost(): string
+    {
+        return $this->host;
     }
 }

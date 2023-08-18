@@ -19,6 +19,7 @@ class HttpRequestTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
         $_SERVER['REQUEST_METHOD'] = $method = 'get';
+        $_SERVER['HTTP_HOST'] = 'host';
 
         $http = HttpRequest::fromGlobals();
 
@@ -39,5 +40,7 @@ class HttpRequestTest extends TestCase
         $this->assertEquals('/1', $http->getUri());
 
         $this->assertEquals([], $http->getParameters());
+
+        $this->assertEquals('host', $http->getHost());
     }
 }
