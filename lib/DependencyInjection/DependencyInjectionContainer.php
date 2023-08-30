@@ -44,7 +44,9 @@ class DependencyInjectionContainer
     public function load(string $className): ?object
     {
         if (in_array($className, [DependencyInjection::class, HttpDependencyInjection::class, CliDependencyInjection::class])) {
-            return $this->dependencyInjection;
+            $di = $this->dependencyInjection;
+            /** @var T $di */
+            return $di;
         }
         if (!isset($this->container[$className])) {
             throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
