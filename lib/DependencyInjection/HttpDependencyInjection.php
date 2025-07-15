@@ -69,7 +69,7 @@ class HttpDependencyInjection extends DependencyInjection
     public function generateResponse(string $body = '', int $statusCode = 200, array $headers = []): ResponseInterface
     {
         try {
-            $response = $this->getContainer()->loadCallable(ResponseInterface::class);
+            $response = $this->getContainer()->load(ResponseInterface::class);
         } catch (Throwable) {
             $response = new HttpResponse('');
         }
@@ -90,7 +90,7 @@ class HttpDependencyInjection extends DependencyInjection
     public function getRequest(): HttpRequestInterface
     {
         try {
-            $request = $this->getContainer()->loadCallable(HttpRequestInterface::class);
+            $request = $this->getContainer()->load(HttpRequestInterface::class);
         } catch (Throwable) {
             // Default use HttpRequest if no request was set in di container
             $request = HttpRequest::fromGlobals();
