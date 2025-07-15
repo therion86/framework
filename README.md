@@ -83,7 +83,7 @@ You can register callables in your di. For example for static inits of classes, 
 
 You can just register them by using the ```registerCallable(string $className, callable $callback)``` method of the Container.
 
-You can load the entry by using the ```loadCallable(string $className)``` from the container. Note the method executes the callable method.
+You can load the entry by using the ```load(string $className)``` from the container. Note the method executes the callable method.
 
 ### 11. Register classes with static parameters 
 You can register classes with static parameters for example defaultUserId or something else.

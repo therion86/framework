@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Therion86\Framework\DependencyInjection;
 
+use JetBrains\PhpStorm\Deprecated;
 use Therion86\Framework\Exceptions\ClassNotRegisteredException;
 use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use ReflectionClass;
@@ -30,7 +31,7 @@ class DependencyInjectionContainer
 
     public function registerCallable(string $className, callable $callable): void
     {
-        $this->statics[$className] = $callable;
+        $this->container[$className] = $callable;
     }
 
     /**
@@ -44,10 +45,15 @@ class DependencyInjectionContainer
     public function load(string $className): ?object
     {
         if (in_array($className, [DependencyInjection::class, HttpDependencyInjection::class, CliDependencyInjection::class])) {
-            return $this->dependencyInjection;
+            $di = $this->dependencyInjection;
+            /** @var T $di */
+            return $di;
         }
         if (!isset($this->container[$className])) {
             throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
+        }
+        if (is_callable($this->container[$className])) {
+            return $this->container[$className]();
         }
         if (isset($this->parameters[$className])) {
             return $this->getObjectWithParameters($className);
@@ -55,12 +61,18 @@ class DependencyInjectionContainer
         return $this->getDependenciesByReflection($className);
     }
 
-    public function loadCallable(string $className): object
+    /**
+     * @deprecated use load() instead
+     * @template T
+     * @param class-string<T> $className
+     * @return T|null
+     * @throws ReflectionException
+     * @throws ClassNotRegisteredException
+     * @throws ConstructorParameterTypeNotFoundException
+     */
+    #[Deprecated(reason: 'Use load() instead')]public function loadCallable(string $className): object
     {
-        if (!isset($this->statics[$className])) {
-            throw new ClassNotRegisteredException('Class ' . $className . ' was not registered');
-        }
-        return $this->statics[$className]();
+        return $this->load($className);
     }
 
 
