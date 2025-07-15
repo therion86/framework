@@ -9,6 +9,8 @@ use Therion86\App\Cli\Example\Handler\ExampleHandler;
 use Exception;
 use Therion86\Framework\DependencyInjection\CliDependencyInjection;
 use stdClass;
+use Therion86\Framework\Request\HttpRequest;
+use Therion86\Framework\Response\HttpResponse;
 
 
 /**
@@ -58,11 +60,11 @@ class CliDependencyInjectionTest extends \PHPUnit\Framework\TestCase
     public function testServicesWhereAddedToContainerWithParam(): void
     {
         $_SERVER['argv'] = ['index.php', 'example', '--name=Test'];
-        $di = new CliDependencyInjection([], [\Therion86\Framework\Request\HttpRequest::class => ['', '', [], [], '']]);
+        $di = new CliDependencyInjection([], [HttpResponse::class => ['', 200,[]]]);
 
         $this->assertInstanceOf(
-            \Therion86\Framework\Request\HttpRequest::class,
-            $di->getContainer()->load(\Therion86\Framework\Request\HttpRequest::class)
+            HttpResponse::class,
+            $di->getContainer()->load(HttpResponse::class)
         );
     }
 

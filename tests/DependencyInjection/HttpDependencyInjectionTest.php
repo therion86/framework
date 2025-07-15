@@ -14,6 +14,7 @@ use Therion86\Framework\Interfaces\ResponseInterface;
 use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Therion86\Framework\Response\HttpResponse;
 
 /**
  * @covers \Therion86\Framework\DependencyInjection\HttpDependencyInjection
@@ -37,6 +38,7 @@ class HttpDependencyInjectionTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
         $_SERVER['REQUEST_METHOD'] = 'get';
+        $_SERVER['HTTP_HOST'] = 'test';
 
         $di = new HttpDependencyInjection([Factory::class], []);
         $di->getRouter()->route();
@@ -72,11 +74,11 @@ class HttpDependencyInjectionTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/1';
         $_SERVER['SCRIPT_NAME'] = '/index.php';
         $_SERVER['REQUEST_METHOD'] = 'get';
-        $di = new HttpDependencyInjection([], [HttpRequest::class => ['', '', [], [], '']]);
+        $di = new HttpDependencyInjection([], [HttpResponse::class => ['', 200, []]]);
 
         $this->assertInstanceOf(
-            HttpRequest::class,
-            $di->getContainer()->load(HttpRequest::class)
+            HttpResponse::class,
+            $di->getContainer()->load(HttpResponse::class)
         );
     }
 

@@ -11,6 +11,7 @@ use Therion86\Framework\Exceptions\ClassNotRegisteredException;
 use Therion86\Framework\Exceptions\ConstructorParameterTypeNotFoundException;
 use Therion86\Framework\Request\HttpRequest;
 use PHPUnit\Framework\TestCase;
+use Therion86\Framework\Response\HttpResponse;
 
 /**
  * @covers \Therion86\Framework\DependencyInjection\DependencyInjectionContainer
@@ -31,9 +32,9 @@ class DependencyInceptionContainerTest extends TestCase
     {
         $di = new HttpDependencyInjection([], []);
         $dic = new DependencyInjectionContainer($di);
-        $dic->register(HttpRequest::class, HttpRequest::class, ['', '', [],[],'']);
+        $dic->register(HttpResponse::class, HttpResponse::class, ['', 200, []]);
 
-        $this->assertInstanceOf(HttpRequest::class, $dic->load(HttpRequest::class));
+        $this->assertInstanceOf(HttpResponse::class, $dic->load(HttpResponse::class));
     }
 
 
