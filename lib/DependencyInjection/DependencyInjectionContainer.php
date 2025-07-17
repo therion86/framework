@@ -99,7 +99,17 @@ class DependencyInjectionContainer
                 }
                 $dependencies[] = $param->getDefaultValue();
             } else {
-                $dependencies[] = $this->load($type->getName());
+                if ($type->isBuiltin()) {
+                    if (!$param->isDefaultValueAvailable()) {
+                        throw new ConstructorParameterTypeNotFoundException(
+                            'Default value must be Set for string, int etc. ' . $className
+                        );
+                    } else {
+                        $dependencies[] = $param->getDefaultValue();
+                    }
+                } else {
+                    $dependencies[] = $this->load($type->getName());
+                }
             }
         }
         return $refClass->newInstanceArgs($dependencies);
