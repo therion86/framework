@@ -28,7 +28,7 @@
   },
   "require": {
     "php": ">=8.3",
-    "phpunit/phpunit": "^9.6",
+    "phpunit/phpunit": "^12.5",
     "phpspec/prophecy-phpunit": "^1.1.0"
   },
   "require-dev": {
